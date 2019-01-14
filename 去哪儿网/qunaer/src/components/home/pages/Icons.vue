@@ -1,6 +1,6 @@
 <template>
     <div class="icons">
-        <swiper :options="swiperOption">
+        <swiper :options="swiperOption" class="swiper">
             <swiper-slide v-for="(page,index) in page" :key=index>
                 <div class='icons-item' v-for="item in page" :key=item.id>
                     <img :src=item.imgUrl :key=item.id>
@@ -49,8 +49,9 @@ export default{
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
 .icons{
+    background:#fff;
     width:100%;
     overflow:hidden;
 }
@@ -72,5 +73,15 @@ export default{
     font-size:.24rem;
     text-align:center;
     margin-top:.1rem;
+}
+.swiper-pagination{
+    top: 2.85rem;
+}
+.swiper >>> .swiper-pagination-bullet{
+    width:.13rem;
+    height:.13rem;
+}
+.swiper >>> .swiper-pagination-bullet-active{
+    background: #00bcd4;
 }
 </style>
