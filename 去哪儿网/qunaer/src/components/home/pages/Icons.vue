@@ -16,7 +16,7 @@
 export default{
     data(){
         return{
-            iconsList:[
+            "iconsList":[
                 {"id":"01", "imgUrl":require('@/assets/img/icons1.png'),"title":"景点门票"},
                 {"id":"02", "imgUrl":require('@/assets/img/icons2.png'),"title":"一日游"},
                 {"id":"03", "imgUrl":require('@/assets/img/icons3.png'),"title":"上海必游"},
@@ -50,6 +50,7 @@ export default{
 </script>
 
 <style scoped lang="stylus">
+@import '~css/common.styl'
 .icons{
     background:#fff;
     width:100%;
@@ -69,6 +70,7 @@ export default{
     padding-top: .2rem;
 }
 .icons-item p{
+    textOverflow();
     color:#212121;
     font-size:.24rem;
     text-align:center;

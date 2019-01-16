@@ -28,7 +28,13 @@ export default{
                 },
                 {
                     "id":"05", "imgUrl":require('@/assets/img/swiper5.jpg')
-                }
+                },
+                {
+                    "id":"06", "imgUrl":require('@/assets/img/swiper6.jpg')
+                },
+                {
+                    "id":"07", "imgUrl":require('@/assets/img/swiper7.jpg')
+                },
             ],
             swiperOption:{
                 pagination:{
