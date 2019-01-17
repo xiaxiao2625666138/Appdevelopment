@@ -5,6 +5,8 @@
         <home-icons></home-icons>
         <home-location></home-location>
         <home-hot></home-hot>
+        <home-like></home-like>
+        <home-weekend></home-weekend>
     </div>
 </template>
 
@@ -14,6 +16,8 @@ import HomeSwiper from './pages/Swiper'
 import HomeIcons from './pages/Icons'
 import HomeLocation from './pages/Location'
 import HomeHot from './pages/Hot'
+import HomeLike from './pages/Like'
+import HomeWeekend from './pages/Weekend'
 export default{
     components:{
         HomeHeader,
@@ -21,6 +25,8 @@ export default{
         HomeIcons,
         HomeLocation,
         HomeHot,
+        HomeLike,
+        HomeWeekend,
     }
 }
 </script>

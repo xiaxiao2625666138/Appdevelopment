@@ -38,6 +38,7 @@ export default{
 <style scoped lang="stylus">
 @import '~css/common.styl'
 .hot{
+    textOverflow();
     margin-top:.2rem;
     background:#fff;
     padding: .2rem 0 .1rem .2rem;
@@ -62,7 +63,7 @@ export default{
 }
 .hot-item{
     display:inline-block;
-    padding: .2rem .2rem .2rem 0;
+    padding: .2rem .1rem .2rem 0;
     width: 2rem;
     height:2rem;
 }

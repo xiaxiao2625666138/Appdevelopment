@@ -16,8 +16,10 @@ export default{
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+@import '~css/common.styl'
 .location{
+    textOverflow();
     background:#fff;
     position:relative;
     padding-top:.4rem;

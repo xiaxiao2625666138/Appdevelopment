@@ -20,7 +20,9 @@ export default{
 
 <style scoped lang='stylus'>
 @import '~css/var.styl'
+@import '~css/common.styl'
 .header{
+    textOverflow();
     background:$bgColor;
     width:100%;
     display:flex;

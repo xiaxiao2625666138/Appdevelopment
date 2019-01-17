@@ -47,8 +47,10 @@ export default{
 }
 </script>
 
-<style scoped>
+<style scoped lang="stylus">
+@import '~css/common.styl'
 .swiper{
+    textOverflow();
     background:#ccc;
     height:0;
     padding-bottom:26.67%;

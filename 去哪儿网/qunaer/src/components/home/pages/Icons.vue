@@ -52,9 +52,9 @@ export default{
 <style scoped lang="stylus">
 @import '~css/common.styl'
 .icons{
+    text-overflow();
     background:#fff;
     width:100%;
-    overflow:hidden;
 }
 .icons-item{
     width:25%;
