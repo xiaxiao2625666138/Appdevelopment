@@ -7,6 +7,7 @@
         <home-hot></home-hot>
         <home-like></home-like>
         <home-weekend></home-weekend>
+        <home-others></home-others>
     </div>
 </template>
 
@@ -18,6 +19,7 @@ import HomeLocation from './pages/Location'
 import HomeHot from './pages/Hot'
 import HomeLike from './pages/Like'
 import HomeWeekend from './pages/Weekend'
+import HomeOthers from './pages/Others'
 export default{
     components:{
         HomeHeader,
@@ -27,6 +29,7 @@ export default{
         HomeHot,
         HomeLike,
         HomeWeekend,
+        HomeOthers,
     }
 }
 </script>
