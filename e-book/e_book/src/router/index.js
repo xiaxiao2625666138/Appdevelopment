@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/home/Home'
+import Books from '@/components/books/Books'
+import Details from '@/components/details/Details'
 
 Vue.use(Router)
 
@@ -8,8 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home 
+    },
+    {
+      path: '/books',
+      name:'Books',
+      component:Books
+    },
+    {
+      path:'/details',
+      name:'Details',
+      component:Details
     }
   ]
 })
