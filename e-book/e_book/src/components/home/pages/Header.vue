@@ -4,7 +4,9 @@
       <input type="text" placeholder="搜索 | 深入理解计算机系统" />
     <p class="login-register">
         <span @click="tologin" class="iconfont">&#xe621;</span> 
-        <span class="iconfont">&#xe631;</span>
+        <router-link to="./shopping">
+            <span class="iconfont">&#xe631;</span>
+        </router-link>
     </p>
   </div>
 </template>
