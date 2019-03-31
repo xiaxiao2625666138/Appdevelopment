@@ -7,13 +7,13 @@
                     <ul class="books">
                         <div v-for="i in 10" class="item block">
                          <div class="front item-front"></div>
-                           <img src="@/assets/img/ics.jpg" />
+                           <img :src=book.imgUrl />
                            <div class="message">
-                             <p>深入理解计算机系统</p>
-                             <p>作者: Randal E. Bryant & David R. O'Hallaron</p>
-                             <p>评分: 9.9</p>
+                             <p>{{book.name}}</p>
+                             <p>{{book.author}}</p>
+                             <p>评分: {{book.score}}</p>
                              <p>价格:
-                                <span class="highlight">￥1</span>
+                                <span class="highlight">￥{{book.price}}</span>
                              </p>
                             </div>
                         </div>
@@ -24,32 +24,30 @@
                     <ul class="books">
                         <div v-for="i in 10" class="item block">
                           <div class="front item-front"></div>
-                          <img src="@/assets/img/ics.jpg" />
+                          <img :src=book.imgUrl />
                           <div class="message">
-                           <p >深入理解计算机系统</p>
-                           <p>作者: Randal E. Bryant & David R. O'Hallaron</p>
-                           <p>评分: 9.9</p>
+                           <p >{{book.name}}</p>
+                           <p>{{book.author}}</p>
+                           <p>评分: {{book.score}}</p>
                            <p>销量:
-                             <span class="highlight">0 </span>册</p>
+                             <span class="highlight">{{book.saled}} </span>册</p>
                           </div>
                         </div>
                     </ul>
                 </div>
             </div>
             <div class="book-details">
-                <div class="this-book block">
-                    <img src="@/assets/img/ics.jpg" />
+                <div  class="this-book block">
+                    <img :src=book.imgUrl />
                     <div class="book-message">
-                        <p class="highlight score"> 9.9 </p>
-                        <p class="book-name" @click="changeColor" :style="nameStyle">深入理解计算机系统</p>
-                        <p>Randal E. Bryant & David R. O'Hallaron</p>
-                        <p>第三版( 英文版 )</p>
-                        <p>机械工业出版社 </p>
-                        <p><span class="highlight">￥1</span><span>月售 0册</span></p>
+                        <p class="highlight score"> {{book.score}} </p>
+                        <p class="book-name" @click="changeColor" :style="nameStyle">{{book.name}}</p>
+                        <p>{{book.author}}</p>
+                        <p>{{book.version}}</p>
+                        <p>{{book.publish}} </p>
+                        <p><span class="highlight">￥{{book.price}}</span><span>销量 {{book.saled}}册</span></p>
                         <p class="logo">
-                            <button>本科教学</button>
-                            <button>计算机系统</button>
-                            <button>入门</button>
+                            <button v-for="logo in book.logo">{{logo}}</button>
                         </p>
                     </div>
                     <div class="book-fun">
@@ -82,7 +80,7 @@
                     <p>相关书籍</p>
                     <ul >
                         <li v-for="i in 10">
-                            <img src="@/assets/img/ics.jpg" />
+                            <img :src=book.imgUrl />
                         </li>
                     </ul>
                 </div>
@@ -94,6 +92,7 @@
 
 <script>
 export default {
+    props:['book'],
     data(){
         return{
             nameStyle:{

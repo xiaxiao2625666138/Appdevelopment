@@ -18,7 +18,7 @@
                         <ul class="recommand">
                           <li v-for=" i in 8">
                             <router-link to="/details">
-                              <img src="@/assets/img/ics.jpg"/>
+                              <img :src=books[0].imgUrl />
                             </router-link>
                           </li>
                         </ul>
@@ -44,7 +44,7 @@
                         <ul class="newbook">
                           <li v-for="i in 40">
                             <router-link to="/details">
-                              <img src="@/assets/img/ics.jpg"/>
+                              <img :src=books[0].imgUrl />
                             </router-link>
                           </li>
                         </ul>
@@ -56,7 +56,9 @@
                   </router-link>
                   <ul>
                     <li v-for="i in 10">
+                      <router-link to="./details">
                       <p>{{i}}.<a href="details.html">深入理解计算机系统</a></p>
+                      </router-link>
                     </li>
                   </ul>
                 </div>
@@ -68,7 +70,7 @@
 
 <script>
 export default {
-  
+    props:['books'],
 }
 </script>
 

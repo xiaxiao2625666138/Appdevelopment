@@ -3,7 +3,7 @@
     <login-register :ToLogin="ToLogin" :ToRegister="ToRegister" :ToDisplay="ToDisplay"
     class="login-register"></login-register>
     <home-header @tologin="tologin"></home-header>
-    <home-body></home-body>
+    <home-body :books='books'></home-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>
@@ -22,12 +22,19 @@ export default {
       ToDisplay:{
         display:"none",
       },
+      books:[],
     }
   },
   components:{
     HomeHeader,
     HomeBody,
     LoginRegister,
+  },
+   mounted(){
+        this.$http.get("http://localhost:8080/static/mock/dataHome.json").then((res)=>{
+          const data=res.data.data;
+          this.books=data;
+        })
   },
   methods:{
     tologin:function(){

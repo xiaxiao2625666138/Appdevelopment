@@ -12,7 +12,7 @@
             <ul class="bl">
                 <li v-for="i in 50">
                     <router-link to="/details">
-                       <img src="@/assets/img/ics.jpg" />
+                       <img :src=books[0].imgUrl />
                     </router-link>
                 </li>
             </ul>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  
+    props:['books']
 }
 </script>
 

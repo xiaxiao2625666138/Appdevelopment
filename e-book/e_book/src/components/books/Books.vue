@@ -1,7 +1,7 @@
 <template>
   <div class="books page">
     <books-header></books-header>
-    <books-body></books-body>
+    <books-body :books='books'></books-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>
@@ -12,9 +12,20 @@
 import BooksHeader from './pages/Header'
 import BooksBody from './pages/Body'
 export default {
+  data(){
+    return {
+      books:[],
+    }
+  },
   components:{
     BooksHeader,
     BooksBody,
+  },
+  mounted(){
+        this.$http.get("http://localhost:8080/static/mock/dataHome.json").then((res)=>{
+          const data=res.data.data;
+          this.books=data;
+        })
   }
 }
 </script>

@@ -14,6 +14,9 @@ import './assets/css/iconfont.css'
 import FastClick from 'fastclick'
 FastClick.attach(document.body);
 
+//axios
+import axios from 'axios'
+Vue.prototype.$http=axios
 
 /* eslint-disable no-new */
 new Vue({
