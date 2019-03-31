@@ -18,7 +18,7 @@
                         <ul class="recommand">
                           <li v-for=" i in 8">
                             <router-link to="/details">
-                              <img :src=books[0].imgUrl />
+                              <img :src="books[0].imgUrl" />
                             </router-link>
                           </li>
                         </ul>
@@ -44,7 +44,7 @@
                         <ul class="newbook">
                           <li v-for="i in 40">
                             <router-link to="/details">
-                              <img :src=books[0].imgUrl />
+                              <img :src="books[0].imgUrl" />
                             </router-link>
                           </li>
                         </ul>

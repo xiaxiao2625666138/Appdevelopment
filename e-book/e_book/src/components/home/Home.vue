@@ -3,7 +3,7 @@
     <login-register :ToLogin="ToLogin" :ToRegister="ToRegister" :ToDisplay="ToDisplay"
     class="login-register"></login-register>
     <home-header @tologin="tologin"></home-header>
-    <home-body :books='books'></home-body>
+    <home-body v-if="books[0]" :books='books'></home-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="books page">
     <books-header></books-header>
-    <books-body :books='books'></books-body>
+    <books-body v-if="books[0]" :books='books'></books-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>

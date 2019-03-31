@@ -7,7 +7,7 @@
                     <ul class="books">
                         <div v-for="i in 10" class="item block">
                          <div class="front item-front"></div>
-                           <img :src=book.imgUrl />
+                           <img :src="book.imgUrl" />
                            <div class="message">
                              <p>{{book.name}}</p>
                              <p>{{book.author}}</p>
@@ -24,7 +24,7 @@
                     <ul class="books">
                         <div v-for="i in 10" class="item block">
                           <div class="front item-front"></div>
-                          <img :src=book.imgUrl />
+                          <img :src="book.imgUrl" />
                           <div class="message">
                            <p >{{book.name}}</p>
                            <p>{{book.author}}</p>
@@ -38,7 +38,7 @@
             </div>
             <div class="book-details">
                 <div  class="this-book block">
-                    <img :src=book.imgUrl />
+                    <img :src="book.imgUrl" />
                     <div class="book-message">
                         <p class="highlight score"> {{book.score}} </p>
                         <p class="book-name" @click="changeColor" :style="nameStyle">{{book.name}}</p>
@@ -80,7 +80,7 @@
                     <p>相关书籍</p>
                     <ul >
                         <li v-for="i in 10">
-                            <img :src=book.imgUrl />
+                            <img :src="book.imgUrl" />
                         </li>
                     </ul>
                 </div>
