@@ -98,7 +98,7 @@ export default {
 }
 .fun input{
   border-radius: 2px;
-  height:40px;
+  height:35px;
   font-size:15px;
   cursor:pointer;
 }

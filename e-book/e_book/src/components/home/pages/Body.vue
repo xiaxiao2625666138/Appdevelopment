@@ -86,6 +86,7 @@ export default {
     width:160px;
     padding:20px 2px;
     z-index:100;
+    border-radius:6px;
 }
 
 .body-left p{
