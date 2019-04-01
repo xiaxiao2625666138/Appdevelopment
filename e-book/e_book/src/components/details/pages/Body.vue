@@ -51,8 +51,8 @@
                         </p>
                     </div>
                     <div class="book-fun">
-                        <button>收藏</button>
-                        <button>购物车</button>
+                        <span class="iconfont shoucang">&#xe601;</span>
+                        <span class="iconfont gouwuche">&#xe60c;</span>
                     </div>
                 </div>
                 <div class="preview block">
@@ -104,7 +104,7 @@ export default {
       changeColor:function(){
           this.nameStyle.color=(this.nameStyle.color=="#aaa" 
           || this.nameStyle.color=="black") ?"red": "black";
-      }
+      },
   }
 }
 </script>
@@ -216,7 +216,7 @@ export default {
 }
 
 .this-book img{
-    width:130px;
+    width:135px;
 }
 
 .this-book button{
@@ -253,27 +253,39 @@ export default {
     cursor:auto;
 }
 
-.book-fun button{
-    border-radius:4px;
-    margin:5px 3px;
+.book-fun{
+    padding-bottom:10px;
 }
 
-.book-fun button:hover{
-    background:#111;
+.book-fun span{
+    display:inline-block;
+    width:60px;
+    text-align:center;
+    cursor:pointer;
+    color:cadetblue;
 }
 
+.shoucang{
+    font-size:24px;
+}
+.gouwuche{
+    font-size:28px;
+}
+
+.book-fun span:hover{
+    color:#000;
+}
 
 .preview{
     margin-top:2px;
     width:640px;
     overflow:hidden;
-    padding:10px 1px;
+    padding:10px 2px;
 }
 
 .preview span{
     padding:8px 12px 4px 12px;
-    margin:8px;
-    font-size:20px;
+    font-size:16px;
     border-bottom:solid 2px #111;
     cursor:pointer;
 }

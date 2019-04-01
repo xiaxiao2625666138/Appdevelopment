@@ -4,7 +4,8 @@ import Home from '@/components/home/Home'
 import Books from '@/components/books/Books'
 import Details from '@/components/details/Details'
 import Shopping from '@/components/shopping/Shopping'
-
+import Daijian from '@/components/daijian/Daijian'
+import Setting from '@/components/setting/setting'
 Vue.use(Router)
 
 export default new Router({
@@ -28,6 +29,16 @@ export default new Router({
       path:'/shopping',
       name:'Shopping',
       component:Shopping
+    },
+    {
+      path:'/daijian',
+      name:'Daijian',
+      component:Daijian
+    },
+    {
+      path:'/setting',
+      name:'Setting',
+      component:Setting
     }
   ]
 })

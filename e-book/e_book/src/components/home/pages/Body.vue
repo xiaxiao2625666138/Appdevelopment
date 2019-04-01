@@ -2,11 +2,21 @@
   <div class="content">
         <div class="body">
             <div class="body-left block">
-              <p>收藏</p>
-              <p>购物车</p>
-              <p>求推荐</p>
-              <p>我的订单</p>
-              <p>设置</p>
+              <router-link to="./daijian">
+                <p title="暂时没有收藏功能">收藏</p>
+              </router-link>
+              <router-link to="./shopping">
+                <p>购物车</p>
+              </router-link>
+              <router-link to="./daijian">
+                <p title="暂时没有推荐功能">求推荐</p>
+              </router-link>
+              <router-link to="./daijian">
+                <p title="暂时不能查看我的订单">我的订单</p>
+              </router-link>
+              <router-link to="./setting">
+                <p title="暂时没有设置功能">设置</p>
+              </router-link>
             </div>
             <div class="body-right">
               <div class="br-block">
@@ -83,18 +93,18 @@ export default {
 
 .body-left{
     display:inline-block;
-    width:160px;
+    width:150px;
     padding:20px 2px;
     z-index:100;
     border-radius:6px;
 }
 
 .body-left p{
-    font-size:20px;
+    font-size:18px;
     margin:0;
     height:50px;
     line-height:50px;
-    padding-left:50px;
+    padding-left:40px;
     cursor:pointer;
     border-radius:10px;
 }
