@@ -2,7 +2,7 @@
     "data": [
         {
                 "bookid":"1",
-                "imgUrl":"http://localhost:8080/static/mock/img/book1.jpg",
+                "imgUrl":"http://localhost:4040/static/mock/img/book1.jpg",
                 "name": "深入理解计算机系统",
                 "price": "1",
                 "author": "Randal E. Bryant & David R. O'Hallaron",

@@ -31,7 +31,7 @@ export default {
     LoginRegister,
   },
    mounted(){
-        this.$http.get("http://localhost:8080/static/mock/dataHome.json").then((res)=>{
+        this.$http.get("http://localhost:4040/static/mock/dataHome.json").then((res)=>{
           const data=res.data.data;
           this.books=data;
         })
