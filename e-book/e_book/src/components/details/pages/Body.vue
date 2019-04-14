@@ -38,16 +38,26 @@
             </div>
             <div class="book-details">
                 <div  class="this-book block">
-                    <img :src="book.imgUrl" />
+                    <img :src="book.cover" />
                     <div class="book-message">
                         <p class="highlight score"> {{book.score}} </p>
-                        <p class="book-name" @click="changeColor" :style="nameStyle">{{book.name}}</p>
-                        <p>{{book.author}}</p>
-                        <p>{{book.version}}</p>
-                        <p>{{book.publish}} </p>
-                        <p><span class="highlight">￥{{book.price}}</span><span>销量 {{book.saled}}册</span></p>
+                        <p >
+                            <span class="book-name" @click="changeColor" :style="nameStyle">{{book.book_name}}</span>
+                            <span v-if="book.subtitle"> · {{book.subtitle}}</span></p>
+                        <p>作者：{{book.author_name}} 
+                            <span v-if="book.author1_name"> | {{book.author1_name}}</span>
+                            <span v-if="book.author2_name"> | {{book.author2_name}}</span>
+                            <span v-if="book.author3_name"> | {{book.author3_name}}</span> </p>
+                        <p>译者：{{book.translator_name}} 
+                            <span v-if="book.translator1_name"> | {{book.translator1_name}}</span>
+                            <span v-if="book.translator2_name"> | {{book.translator2_name}}</span>
+                            <span v-if="book.translator3_name"> | {{book.translator3_name}}</span> </p>
+                        <p>版本：第{{book.version}}版</p>
+                        <p>语言：{{book.language_name}}</p>
+                        <p>出版：{{book.press_name}} </p>
+                        <p><span class="highlight">￥{{book.price}}</span><span>销量 {{book.saled}} 册</span></p>
                         <p class="logo">
-                            <button v-for="logo in book.logo">{{logo}}</button>
+                            <button v-for="logo in book.logo">{{book.logos}}</button>
                         </p>
                     </div>
                     <div class="book-fun">
@@ -57,23 +67,16 @@
                 </div>
                 <div class="preview block">
                     <div>
-                        <span>简介</span>
-                        <span>作者</span>
+                        <span @click="lookBook" :style="book_intro_style">简介</span>
+                        <span @click="lookAuthor" :style="author_intro_style">作者</span>
                     </div>
                     <div class="pre-content">
-                        <ul>
-                            <div v-for="i in 10">
-                             <p>好</p>
-                             <p>好难</p>
-                             <p>好难啊</p>
-                             <p>好难啊好</p>
-                             <p>好难啊好难</p>
-                             <p>好难啊好难啊</p>
-                             <p>好难啊好难啊好</p>
-                             <p>好难啊好难啊好难</p>
-                             <p>好难啊好难啊好难啊</p>
-                            </div>
-                        </ul>
+                        <p v-if="book_intro">
+                            {{book.detail}}
+                        </p>
+                        <p v-if="author_intro">
+                            {{book.author_detail}}
+                        </p>
                     </div>
                 </div>
                 <div class="similar-book block">
@@ -98,6 +101,14 @@ export default {
             nameStyle:{
                 color:"#aaa"
             },
+            book_intro:true,
+            author_intro:false,
+            book_intro_style:{
+                "border-bottom":"solid 2px orange"
+            },
+            author_intro_style:{
+                "border-bottom":"solid 2px #111"
+            }
         }
     },
     methods:{
@@ -105,7 +116,27 @@ export default {
           this.nameStyle.color=(this.nameStyle.color=="#aaa" 
           || this.nameStyle.color=="black") ?"red": "black";
       },
-  }
+      lookBook:function(){
+          this.book_intro=true;
+          this.book_intro_style={
+                "border-bottom":"solid 2px orange"
+            };
+          this.author_intro=false;
+          this.author_intro_style={
+                "border-bottom":"solid 2px #111"
+            };
+      },
+      lookAuthor:function(){
+          this.book_intro=false;
+          this.book_intro_style={
+                "border-bottom":"solid 2px #111"
+            };
+          this.author_intro=true;
+          this.author_intro_style={
+                "border-bottom":"solid 2px orange"
+            };
+      }
+    },
 }
 </script>
 
@@ -286,7 +317,6 @@ export default {
 .preview span{
     padding:8px 12px 4px 12px;
     font-size:16px;
-    border-bottom:solid 2px #111;
     cursor:pointer;
 }
 
@@ -303,6 +333,13 @@ export default {
     overflow-x:hidden;
     z-index:100;
 }
+.pre-content p{
+    width: 620px;
+    margin: 0 auto;
+    white-space:normal;
+    line-height:30px;
+}
+
 
 .similar-book{
     margin-top:2px;

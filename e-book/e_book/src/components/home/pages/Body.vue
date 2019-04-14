@@ -23,19 +23,19 @@
                 <div class="br-block1">
                     <div class="left block">
                         <router-link to="./books">
-                            <p>推荐 | 书库</p>
+                          <p @click="send">图书浏览</p>
                         </router-link>
                         <ul class="recommand">
-                          <li v-for=" i in 8">
-                            <router-link to="/details">
-                              <img :src="books[0].imgUrl" />
+                          <li v-for="item in books">
+                            <router-link :to="{path: 'details', query:{bid:item.book_id}}">
+                              <img :src="item.cover" />
                             </router-link>
                           </li>
                         </ul>
                     </div>
                 </div>
                 <div class="classify right">
-                  <router-link to="./books">
+                  <router-link to="/books">
                       <p>热门分类 >></p>
                   </router-link>
                   <ul>
@@ -52,9 +52,9 @@
                             <p>新书上架</p>
                         </router-link>
                         <ul class="newbook">
-                          <li v-for="i in 40">
-                            <router-link to="/details">
-                              <img :src="books[0].imgUrl" />
+                          <li v-for="item in books">
+                            <router-link :to="{path: 'details', query:{bid:item.book_id}}">
+                              <img :src="item.cover" />
                             </router-link>
                           </li>
                         </ul>
@@ -65,8 +65,8 @@
                       <p>月榜单 >></p>
                   </router-link>
                   <ul>
-                    <li v-for="i in 10">
-                      <router-link to="./details">
+                    <li v-for="item in books">
+                      <router-link to="./books">
                       <p>{{i}}.<a href="details.html">深入理解计算机系统</a></p>
                       </router-link>
                     </li>
@@ -81,6 +81,13 @@
 <script>
 export default {
     props:['books'],
+    methods:{
+        send:function(){
+            this.$http.get("/ebookWeb_war_exploded/toLookBook").then(function(res){
+                alert("只有一本书:\n"+res.data);
+            })
+        }
+    }
 }
 </script>
 
@@ -132,14 +139,14 @@ export default {
 .br-block1{
     display:inline-block;
     width:620px;
-    height:180px;
+    height:197px;
     overflow:hidden;
 }
 
 .br-block2{
     display:inline-block;
     width:620px;
-    height:348px;
+    height:370px;
     overflow:hidden;
 }
 
@@ -154,7 +161,7 @@ export default {
     overflow-x:hidden;
     overflow-y:auto;
     width:640px;
-    height:315px;
+    height:346px;
 }
 
 .left{

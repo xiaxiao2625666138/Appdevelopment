@@ -1,7 +1,7 @@
 <template>
   <div class="details page">
     <details-header></details-header>
-    <details-body v-if="books[0]" :book="books[0]"></details-body>
+    <details-body v-if="book" :book="book"></details-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>
@@ -14,7 +14,8 @@ import DetailsBody from './pages/Body'
 export default {
   data(){
     return {
-      books:[],
+      book:{},
+      bid:this.$route.query.bid
     }
   },
   components:{
@@ -22,9 +23,10 @@ export default {
     DetailsBody,
   },
    mounted(){
-        this.$http.get("http://localhost:4040/static/mock/dataHome.json").then((res)=>{
-          const data=res.data.data;
-          this.books=data;
+        this.$http.get("/api/DetailServlet?book_id="+this.bid).then((res)=>{
+          console.log(res);
+          const data=res.data;
+          this.book=data;
         })
   },
 }

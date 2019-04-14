@@ -10,12 +10,12 @@
          </div>
          <div class="book-list block">
             <ul class="bl">
-                <li v-for="i in 50">
-                    <router-link to="/details">
-                       <img :src=books[0].imgUrl />
-                    </router-link>
-                </li>
-            </ul>
+                          <li v-for="item in books">
+                            <router-link :to="{path: 'details', query:{bid:item.book_id}}">
+                              <img :src="item.cover" />
+                            </router-link>
+                          </li>
+                        </ul>
         </div>
       </div>
  </div>
@@ -30,7 +30,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content{
-    width:869px;
+    width:744px;
 }
 
 .header span+span{
@@ -55,7 +55,7 @@ export default {
 }
 
 input{
-    margin-left:560px;
+    margin-left:440px;
     border-radius:16px;
 }
 
@@ -67,8 +67,8 @@ img{
 
 .book-list{
     clear:both;
-    width:869px;
-    height:796px;
+    width:744px;
+    height:708px;
     overflow:hidden;
 }
 
@@ -76,8 +76,8 @@ img{
     overflow-x:hidden;
     overflow-y:auto;
     white-space:normal;
-    width:889px;
-    height:794px;
+    width:765px;
+    height:710px;
     z-index:10000;
 }
 
