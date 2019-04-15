@@ -65,7 +65,7 @@
                       <p>月榜单 >></p>
                   </router-link>
                   <ul>
-                    <li v-for="item in books">
+                    <li v-for="i in 10">
                       <router-link to="./books">
                       <p>{{i}}.<a href="details.html">深入理解计算机系统</a></p>
                       </router-link>
