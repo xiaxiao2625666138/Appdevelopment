@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -36,12 +37,15 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
+        HttpSession session = request.getSession(true);
+
         conn=DBUtil.getConnectionByJNDI();
         try{
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT book_id, book_name, cover FROM book";
             rs = stmt.executeQuery(sql);
+
             JSONArray jsonArr=new JSONArray();
             while(rs.next()){
                 JSONObject jsonObj=new JSONObject();
@@ -50,7 +54,15 @@ public class HomeServlet extends HttpServlet {
                 jsonObj.put("cover", rs.getString("cover"));
                 jsonArr.put(jsonObj);
             }
-            out.println(jsonArr);
+            JSONObject jsonObj=new JSONObject();
+            String username="";
+            int islogin=(int)session.getAttribute("islogin");
+            if(islogin==1)
+                username=(String)session.getAttribute("username");
+            jsonObj.put("username", username);
+            jsonObj.put("islogin", islogin);
+            jsonObj.put("bookArr", jsonArr);
+            out.println(jsonObj);
             // 完成后关闭
             DBUtil.closeResource(rs, stmt, conn);
         }catch(Exception err){

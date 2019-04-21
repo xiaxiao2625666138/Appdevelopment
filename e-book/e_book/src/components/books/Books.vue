@@ -1,7 +1,7 @@
 <template>
   <div class="books page">
     <books-header></books-header>
-    <books-body v-if="books[0]" :books='books'></books-body>
+    <books-body :books='books'></books-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>
@@ -23,7 +23,8 @@ export default {
   },
   mounted(){
         this.$http.get("/api/HomeServlet").then((res)=>{
-          const data=res.data;
+          console.log(res);
+          const data=res.data.bookArr;
           this.books=data;
         })
   }

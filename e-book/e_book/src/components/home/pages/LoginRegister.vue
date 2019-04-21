@@ -2,34 +2,38 @@
   <div id='login-register' class="login-register" :style="ToDisplay">
     <p class="iconfont return" @click="close">&#xe658;</p>
     <p class="title iconfont">&#xe621;</p>
-    <div class="choose">
-      <button @click="tologin">登陆</button>
-      <button @click="toregister">注册</button>
+    <div class="choose" >
+      <span style="color:orange">{{message}}</span><br />
+      <button @click="tologin" :style="loginStyle">登陆</button>
+      <button @click="toregister" :style="registerStyle">注册</button>
     </div>
     <div class="login" :style="ToLogin" id="login">
       <div class="enter">
-        <p>用户名:
-          <input type="input" />
+        <p>
+          <input type="text" placeholder="username" v-model="lname" />
         </p>
-        <p>密&emsp;码:
-          <input type="input" />
+        <p>
+          <input type="text" placeholder="password" v-model="lpass" />
         </p>
       </div>
       <div class="submit-button">
-        <button>登陆</button>
+        <button @click="loginRegister">登陆</button>
       </div>
     </div>
-    <div class="register" :style="ToRegister" id="register">
+    <div class="register" :style="ToRegister" id="register" >
       <div class="enter">
-        <p>用户名&emsp;:<input type="input" />
+        <p>
+          <input type="text" placeholder="username" v-model="rname" required/>
         </p>
-        <p>密&emsp;&emsp;码:<input type="input" />
+        <p>
+          <input type="text" placeholder="password" v-model="rpass" required/>
         </p>
-        <p>确认密码:<input type="input" />
+        <p>
+          <input type="input" placeholder="confirm password" v-model="rcpass" required/>
         </p>
       </div>
       <div class="submit-button ">
-        <button>注册</button>
+        <button @click="loginRegister">注册</button>
       </div>
     </div>
   </div>
@@ -37,22 +41,98 @@
 
 <script>
 export default {
-  props:['ToDisplay','ToLogin', 'ToRegister'],
+  props:['ToDisplay','ToLogin', 'ToRegister','status'],
   data:function(){
     return{
+      message:"",
+      loginStyle:{
+         "border-bottom-color": "hsl(182, 89%, 64%)"
+      },
+      registerStyle:{
+        "border-bottom-color": "#444"
+      },
+      fun:0,
+      lname:"",
+      lpass:"",
+      rname:"",
+      rpass:"",
+      rcpass:"",
     }
   },
   methods:{
     tologin:function(){
       this.ToLogin.display="block";
       this.ToRegister.display="none";
+      this.loginStyle={
+         "border-bottom-color": "hsl(182, 89%, 64%)"
+      };
+      this.registerStyle={
+         "border-bottom-color": "#444"
+      };
+      this.fun=0;
+      this.message="";
     },
     toregister:function(){
       this.ToLogin.display="none";
       this.ToRegister.display="block";
+      this.loginStyle={
+         "border-bottom-color": "#444"
+      };
+      this.registerStyle={
+         "border-bottom-color": "hsl(182, 89%, 64%)"
+      };
+      this.fun=1;
+      this.message="";
     },
     close:function(){
       this.ToDisplay.display="none";
+      this.message="";
+      this.lname="";
+      this.lpass="";
+      this.rname="";
+      this.rpass="";
+      this.rcpass="";
+    },
+    loginRegister:function(){
+      if(this.fun==0){
+        var getUrl="/api/LoginServlet?username="+this.lname+"&password="+this.lpass;
+        this.$http.get(getUrl).then((res)=>{
+          console.log(res);
+          var status=res.data;
+          if(status==-3){
+            this.message="password cannot be null!"
+          }else if(status==-2){
+            this.message="username cannot be null!"
+          }else if(status==-1){
+            this.message="Please Check User Name! ";
+          }else if(status==0){
+            this.message="Please Check Password! "
+          }else if(status==1){
+            this.$emit("loginSuc", this.lname);
+            this.close();
+          }else{
+            this.message="User Has logined! "
+          }
+        })
+      }else{
+        var getUrl="/api/RegisterServlet?username="+this.rname+"&password="
+        +this.rpass+"&cpassword="+this.rcpass;
+        this.$http.get(getUrl).then((res)=>{
+          console.log(res);
+          var status=res.data;
+          if(status==-3){
+            this.message="password cannot be null!"
+          }else if(status==-2){
+            this.message="username cannot be null!"
+          }else if(status==-1){
+            this.message="Different Password! ";
+          }else if(status==0){
+            this.message="Username Has Been Registered! "
+          }else if(status==1){
+            this.message="Register Successfully! "
+          }
+        })
+      }
     }
   }
 }
@@ -62,7 +142,7 @@ export default {
 <style scoped>
 .login-register {
   background: #000;
-  width: 350px;
+  width: 320px;
   height: 480px;
   color: #aaa;
   overflow: hidden;
@@ -78,7 +158,7 @@ export default {
   z-index:1000;
 }
 .title {
-  margin:50px 0;
+  margin:50px 0 20px 0;
   font-size: 30px;
   color: rgb(163, 196, 204);
   text-align: center;
@@ -93,7 +173,6 @@ export default {
 }
 
 .choose {
-  margin-top:40px;
   margin-bottom:40px;
 }
 
@@ -107,12 +186,9 @@ button {
   background: #000;
   color: #aaa;
   cursor: pointer;
-  width: 120px;
+  width: 100px;
 }
 
-.choose button:hover {
-  border-bottom-color: cadetblue;
-}
 
 input {
   border-width: 0;
@@ -127,7 +203,7 @@ input {
   margin-bottom: 20px;
 }
 .enter input:hover {
-  border-bottom-color: cadetblue;
+  border-bottom-color: hsl(182, 89%, 64%);
 }
 .enter {
   margin-bottom:20px;
@@ -141,6 +217,6 @@ input {
   height: 30px;
 }
 .submit-button button:hover {
-  background: cadetblue;
+  background: hsl(182, 89%, 64%);
 }
 </style>

@@ -23,7 +23,7 @@
                 <div class="br-block1">
                     <div class="left block">
                         <router-link to="./books">
-                          <p @click="send">图书浏览</p>
+                          <p>图书浏览</p>
                         </router-link>
                         <ul class="recommand">
                           <li v-for="item in books">
@@ -82,11 +82,7 @@
 export default {
     props:['books'],
     methods:{
-        send:function(){
-            this.$http.get("/ebookWeb_war_exploded/toLookBook").then(function(res){
-                alert("只有一本书:\n"+res.data);
-            })
-        }
+       
     }
 }
 </script>

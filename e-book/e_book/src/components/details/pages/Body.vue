@@ -62,7 +62,7 @@
                     </div>
                     <div class="book-fun">
                         <span class="iconfont shoucang">&#xe601;</span>
-                        <span class="iconfont gouwuche">&#xe60c;</span>
+                        <span class="iconfont gouwuche" @click="addOrder">&#xe60c;</span>
                     </div>
                 </div>
                 <div class="preview block">
@@ -135,6 +135,11 @@ export default {
           this.author_intro_style={
                 "border-bottom":"solid 2px orange"
             };
+      },
+      addOrder:function(){
+          var getUrl="/api/AddOrderServlet?book_id="+this.book.book_id;
+          this.$http.get(getUrl).then((res)=>{
+          console.log(res)});
       }
     },
 }
@@ -305,6 +310,10 @@ export default {
 
 .book-fun span:hover{
     color:#000;
+}
+
+.book-fun span:active{
+    color:cadetblue;
 }
 
 .preview{

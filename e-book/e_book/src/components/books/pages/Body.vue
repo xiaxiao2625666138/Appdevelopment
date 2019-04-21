@@ -10,12 +10,12 @@
          </div>
          <div class="book-list block">
             <ul class="bl">
-                          <li v-for="item in books">
-                            <router-link :to="{path: 'details', query:{bid:item.book_id}}">
-                              <img :src="item.cover" />
-                            </router-link>
-                          </li>
-                        </ul>
+               <li v-for="item in books">
+                <router-link :to="{path: 'details', query:{bid:item.book_id}}">
+                  <img :src="item.cover" />
+               </router-link>
+               </li>
+            </ul>
         </div>
       </div>
  </div>

@@ -3,7 +3,9 @@
       <span class="ebook" title="change style">ebook</span>
       <input type="text" placeholder="搜索 | 深入理解计算机系统" />
     <p class="login-register">
-        <span @click="tologin" class="iconfont">&#xe621;</span> 
+        <span @click="tologin" class="iconfont">&#xe621; 
+            <span style="font-size:15px;color:orange">{{user}}</span>
+        </span> 
         <router-link to="./shopping">
             <span class="iconfont">&#xe631;</span>
         </router-link>
@@ -13,6 +15,7 @@
 
 <script>
 export default {
+  props:['status', 'user'],
   methods:{
       tologin:function(event){
           this.$emit('tologin')

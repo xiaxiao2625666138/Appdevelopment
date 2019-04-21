@@ -1,32 +1,55 @@
 <template>   
-  <div class="shopping-item">
+  <div class="shopping-item" :style="deleteOrder">
       <p  class="item-button" @click="choose">
-        <button :style="chosen"/>
+        <button :class="{chosen:chosen, notchosen:!chosen}"/>
       </p>
-      <div class="item-message"></div>
+      <div class="item-message">
+          <img :src="order.cover"/>
+          <div class="order-message" >
+            <p class="order-time">订单时间：{{order.time}}</p>
+            <p class="book-name">{{order.book_name}}<span v-if="order.subtitle" class="subtitle"> · {{order.subtitle}}</span></p>
+            <p>第 <span class="version">{{order.version}}</span> 版 · <span class="version">{{order.language_name}}</span> 版</p>
+            <p>价格：<span class="price">￥{{order.price}}</span></p>
+          </div>
+      </div>
       <div class="number">
-        <input type="button" value="-" @click="add(0)" class="jian" /><input type="button" :value="num" class="shu" /><input type="button" value="+" @click="add(1)" class="jia" />
+        <input type="button" value="-" @click="addBook(-1)" class="jian" /><input type="button" :value="num" class="shu" /><input type="button" value="+" @click="addBook(1)" class="jia" />
       </div>
   </div>
 </template>
 
 <script>
 export default {
+  props:['order'],
   data(){
     return {
-      chosen:{
-        "background":"black"
-      },
-      num:1
+      chosen:this.order.chosen=='Y',
+      num:this.order.book_num,
+      deleteOrder:{
+        display:"block"
+      }
     }
   },
   methods:{
     choose:function(){
-      this.chosen.background=this.chosen.background=="black"?"cadetblue":"black";
+      var ch;
+      if(this.chosen){
+        ch="N";
+      }else{
+        ch="Y";
+      }
+      var getUrl="/api/ChooseOrderServlet?order_id="+this.order.order_id
+      +"&chosen="+ch;
+          this.$http.get(getUrl).then((res)=>{
+          console.log(res)});
+      this.chosen=!this.chosen;
     },
-    add:function(m){
-      if (m==0) this.num=(this.num-1)>0 ?this.num-1:0;
-      else this.num=this.num+1;
+    addBook:function(m){
+      var getUrl="/api/AddBookServlet?order_id="+this.order.order_id
+      +"&addition="+m;
+          this.$http.get(getUrl).then((res)=>{
+          console.log(res);
+          this.num=res.data;});
     }
   }
 }
@@ -44,6 +67,14 @@ export default {
   position:relative;
 }
 
+.notchosen{
+    background:black;
+}
+
+.chosen{
+  background:cadetblue;
+}
+
 .item-button{
   height:160px;
   width:50px;
@@ -51,6 +82,10 @@ export default {
   position:relative;
   background:#333;
   cursor:pointer;
+}
+
+.item-button:hover{
+  background:cadetblue;
 }
 
 .item-button button{
@@ -67,6 +102,7 @@ export default {
   display:inline-block;
   width:545px;
   height:160px;
+  overflow:hidden;
 }
 
 .number{
@@ -100,6 +136,46 @@ export default {
   text-align:center;
   background:#000;
   opacity:0.85;
+}
+
+
+img{
+  width:112px;
+}
+
+.order-message{
+  display:inline-block;
+  height:130px;
+  padding:15px;
+  overflow:hidden;
+}
+
+.order-time{
+  height:30px;
+  line-height:30px;
+  color:#666;
+}
+
+.book-name{
+  font-size:17px;
+  height:35px;
+  line-height:35px;
+}
+
+.subtitle{
+  font-size:15px;
+  color:#888;
+}
+
+.version{
+  line-height:25px;
+  color:orange;
+}
+
+.price{
+  font-size:20px;
+  color:orange;
+  height:25px;
 }
 
 </style>

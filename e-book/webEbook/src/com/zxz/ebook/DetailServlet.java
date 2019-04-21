@@ -54,10 +54,10 @@ public class DetailServlet extends HttpServlet {
             jsonObj.put("version", rs.getInt("version"));
             jsonObj.put("language_name", rs.getString("language_name"));
             jsonObj.put("cover", rs.getString("cover"));
-            jsonObj.put("price", rs.getFloat("price"));
+            jsonObj.put("price", new java.text.DecimalFormat("#.0").format(rs.getFloat("price")));
             jsonObj.put("inventory", rs.getInt("inventory"));
             jsonObj.put("saled", rs.getInt("saled"));
-            jsonObj.put("score", rs.getFloat("score"));
+            jsonObj.put("score", new java.text.DecimalFormat("#.0").format(rs.getFloat("score")));
             jsonObj.put("logos", rs.getString("logos"));
             jsonObj.put("detail", rs.getString("detail"));
             jsonObj.put("author1_name", rs.getString("author1_name"));
