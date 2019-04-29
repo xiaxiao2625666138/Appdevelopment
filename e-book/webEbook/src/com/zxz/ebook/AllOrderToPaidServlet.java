@@ -58,6 +58,7 @@ public class AllOrderToPaidServlet extends HttpServlet {
                 JSONObject jsonObj=new JSONObject();
                 jsonObj.put("book_id", rs.getInt("book_id"));
                 jsonObj.put("book_name", rs.getString("book_name"));
+                jsonObj.put("ISBN", rs.getString("ISBN"));
                 jsonObj.put("book_num", rs.getInt("book_num"));
                 jsonObj.put("subtitle", rs.getString("subtitle"));
                 jsonObj.put("version", rs.getInt("version"));

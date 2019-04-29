@@ -74,8 +74,11 @@ li{
 .page{
     width:100%;
     color:#ccc;
-    background:#000;
-    opacity:0.94;
+    background:rgb(248, 252, 231);
+}
+
+.now{
+    color:#555;
 }
 
 
@@ -85,12 +88,13 @@ li{
 
 .header{
     width:100%;
-    background: #222;
+    background: rgb(10, 10, 10);
     overflow:hidden;
     font-size:18px;
     height: 80px;
     box-shadow:0 0 10px 0;
     z-index:100;
+    opacity:.8;
 }
 
 .ebook{
@@ -133,7 +137,7 @@ img:hover{
 }
 
 a{
-    color:#aaa;
+    color:#eee;
     text-decoration:none;
     cursor:pointer;
 }
@@ -143,7 +147,6 @@ a:hover{
 }
 
 button{
-    float:left;
     border-width:0;
     border-radius:15px;
     background:#222;
@@ -176,9 +179,10 @@ ul{
 .footer{
     width:100%;
     height:100px;
-    background:#222;
+    background: rgb(39, 41, 41);
     box-shadow:0 0 10px 0;
     z-index:100;
+    opacity:.8;
 }
 
 .footer p{

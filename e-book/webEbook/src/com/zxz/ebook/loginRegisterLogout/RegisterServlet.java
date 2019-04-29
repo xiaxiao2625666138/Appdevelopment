@@ -31,14 +31,24 @@ public class RegisterServlet extends HttpServlet {
 
         String uname=request.getParameter("username");
         String upass=request.getParameter("password");
+        String ucpass=request.getParameter("cpassword");
+        String uemail=request.getParameter("email");
         PrintWriter out = response.getWriter();
 
-        if(uname.length()==0) {
+        if(uname.trim().length()==0) {
+            out.println(-4);
+            return;
+        }
+        if(!uemail.matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}")){
+            out.println(-3);
+            return;
+        }
+        if(upass.trim().length()==0){
             out.println(-2);
             return;
         }
-        if(upass.length()==0){
-            out.println(-3);
+        if(!upass.equals(ucpass)){
+            out.println(-1);
             return;
         }
 
@@ -52,12 +62,8 @@ public class RegisterServlet extends HttpServlet {
 
         try{
             String sql;
-            if(request.getParameter("cpassword").equals(upass)) {
-                sql = "SELECT registerUser(\"" + uname + "\", \"" + upass + "\") as statusNum;";
-            }else{
-                out.println(-1);
-                return;
-            }
+            sql = "SELECT registerUser(\"" + uname + "\", \"" + upass + "\", \""+uemail+"\") as statusNum;";
+
             stmt=conn.createStatement();
             rs = stmt.executeQuery(sql);
             rs.next();

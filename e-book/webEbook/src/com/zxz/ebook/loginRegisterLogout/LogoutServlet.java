@@ -29,8 +29,6 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String uname=request.getParameter("username");
-
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs=null;
@@ -41,6 +39,7 @@ public class LogoutServlet extends HttpServlet {
         conn=DBUtil.getConnectionByJNDI();
 
         HttpSession session = request.getSession(true);
+        String uname=(String)session.getAttribute("username");
 
         try{
             stmt = conn.createStatement();
@@ -49,6 +48,7 @@ public class LogoutServlet extends HttpServlet {
             rs = stmt.executeQuery(sql);
             rs.next();
             session.setAttribute("islogin", 0);
+            session.setAttribute("username", "");
             out.println(rs.getInt("statusNum"));
             // 完成后关闭
             DBUtil.closeResource(rs, stmt, conn);

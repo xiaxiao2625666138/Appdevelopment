@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.sql.*;
 
 import com.zxz.jndi.DBUtil;
@@ -34,16 +35,34 @@ public class HomeServlet extends HttpServlet {
         ResultSet rs=null;
 
         // 设置响应内容类型
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
         HttpSession session = request.getSession(true);
+        String filter=(String)request.getParameter("filter");
+        int islogin=(int)session.getAttribute("islogin");
 
         conn=DBUtil.getConnectionByJNDI();
         try{
             stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT book_id, book_name, cover FROM book";
+            String sql= "SELECT * FROM bookBrowse WHERE true";
+            if(islogin!=2){
+                sql=sql+" and inventory>0 and onsale='Y'";
+            }
+            if(filter.equals("author")){
+                String name=new String(request.getParameter("author")
+                        .getBytes("iso-8859-1"),"UTF-8");
+                sql=sql+" and author_name like \"%"
+                        +name+"%\" or author1_name like \"%"+name+"%\" or author2_name like \"%"+name
+                        +"%\" or author3_name like \"%"+name+"%\";";
+            }else if(filter.equals("bookname")){
+                String bookname=new String(request.getParameter("bookname")
+                        .getBytes("iso-8859-1"),"UTF-8");
+                sql=sql+ " and book_name like \"%"+bookname+"%\";";
+            }else if(filter.equals("onsale")){
+                sql=sql+" and onsale="+"\'"+(String)request.getParameter("onsale")+"\';";
+            }
             rs = stmt.executeQuery(sql);
 
             JSONArray jsonArr=new JSONArray();
@@ -51,14 +70,19 @@ public class HomeServlet extends HttpServlet {
                 JSONObject jsonObj=new JSONObject();
                 jsonObj.put("book_id", rs.getInt("book_id"));
                 jsonObj.put("book_name", rs.getString("book_name"));
+                jsonObj.put("subtitle", rs.getString("subtitle"));
                 jsonObj.put("cover", rs.getString("cover"));
+                jsonObj.put("ISBN", rs.getString("ISBN"));
+                jsonObj.put("author_name", rs.getString("author_name"));
+                jsonObj.put("author1_name", rs.getString("author1_name"));
+                jsonObj.put("author2_name", rs.getString("author2_name"));
+                jsonObj.put("author3_name", rs.getString("author3_name"));
+                jsonObj.put("inventory", rs.getInt("inventory"));
+                jsonObj.put("onsale", rs.getString("onsale"));
                 jsonArr.put(jsonObj);
             }
             JSONObject jsonObj=new JSONObject();
-            String username="";
-            int islogin=(int)session.getAttribute("islogin");
-            if(islogin==1)
-                username=(String)session.getAttribute("username");
+            String username=(String)session.getAttribute("username");
             jsonObj.put("username", username);
             jsonObj.put("islogin", islogin);
             jsonObj.put("bookArr", jsonArr);

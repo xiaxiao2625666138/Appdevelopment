@@ -32,11 +32,11 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String uname=request.getParameter("username");
         String upass=request.getParameter("password");
-        if(uname.length()==0) {
-            out.println(-2);
+        if(uname.trim().length()==0) {
+            out.println(-4);
             return;
         }
-        if(upass.length()==0){
+        if(upass.trim().length()==0){
             out.println(-3);
             return;
         }
@@ -57,11 +57,12 @@ public class LoginServlet extends HttpServlet {
             sql = "SELECT checkUser(\"" + uname + "\", \"" + upass + "\") as statusNum;";
             rs = stmt.executeQuery(sql);
             rs.next();
-            if(rs.getInt("statusNum")==1){
+            int statusNum=rs.getInt("statusNum");
+            if(statusNum >0 ){
                 session.setAttribute("username", uname);
-                session.setAttribute("islogin", 1);
+                session.setAttribute("islogin", statusNum);
             }
-            out.println(rs.getInt("statusNum"));
+            out.println(statusNum);
             // 完成后关闭
             DBUtil.closeResource(rs, stmt, conn);
         }catch(Exception err){

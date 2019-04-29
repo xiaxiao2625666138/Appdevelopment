@@ -1,6 +1,9 @@
 <template>
-  <div id='login-register' class="login-register" :style="ToDisplay">
-    <p class="iconfont return" @click="close">&#xe658;</p>
+  <div class="bg">
+    <img src="@/assets/img/background1.jpg" style="width:100%"/>
+    <div class="fg"></div>
+    <span class="ebook">ebook</span>
+  <div id='login-register' class="login-register" :style="LRH">
     <p class="title iconfont">&#xe621;</p>
     <div class="choose" >
       <span style="color:orange">{{message}}</span><br />
@@ -13,7 +16,7 @@
           <input type="text" placeholder="username" v-model="lname" />
         </p>
         <p>
-          <input type="text" placeholder="password" v-model="lpass" />
+          <input type="password" placeholder="password" v-model="lpass" />
         </p>
       </div>
       <div class="submit-button">
@@ -26,10 +29,13 @@
           <input type="text" placeholder="username" v-model="rname" required/>
         </p>
         <p>
-          <input type="text" placeholder="password" v-model="rpass" required/>
+          <input type="text" placeholder="@email" v-model="remail" required/>
         </p>
         <p>
-          <input type="input" placeholder="confirm password" v-model="rcpass" required/>
+          <input type="password" placeholder="password" v-model="rpass" required/>
+        </p>
+        <p>
+          <input type="password" placeholder="confirm password" v-model="rcpass" required/>
         </p>
       </div>
       <div class="submit-button ">
@@ -37,24 +43,34 @@
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 export default {
-  props:['ToDisplay','ToLogin', 'ToRegister','status'],
   data:function(){
     return{
       message:"",
       loginStyle:{
-         "border-bottom-color": "hsl(182, 89%, 64%)"
+         "border-bottom-color": "hsl(182, 96%, 50%)"
       },
       registerStyle:{
         "border-bottom-color": "#444"
+      },
+      ToLogin: {
+          display:"block"
+      },
+      ToRegister: {
+          display:"none"
+      },
+      LRH:{
+          height:'460px'
       },
       fun:0,
       lname:"",
       lpass:"",
       rname:"",
+      remail:"",
       rpass:"",
       rcpass:"",
     }
@@ -64,13 +80,14 @@ export default {
       this.ToLogin.display="block";
       this.ToRegister.display="none";
       this.loginStyle={
-         "border-bottom-color": "hsl(182, 89%, 64%)"
+         "border-bottom-color": "rgb(0, 247, 255)"
       };
       this.registerStyle={
          "border-bottom-color": "#444"
       };
       this.fun=0;
       this.message="";
+      this.LRH.height="460px"
     },
     toregister:function(){
       this.ToLogin.display="none";
@@ -79,19 +96,11 @@ export default {
          "border-bottom-color": "#444"
       };
       this.registerStyle={
-         "border-bottom-color": "hsl(182, 89%, 64%)"
+         "border-bottom-color": "rgb(0, 247, 255)"
       };
       this.fun=1;
       this.message="";
-    },
-    close:function(){
-      this.ToDisplay.display="none";
-      this.message="";
-      this.lname="";
-      this.lpass="";
-      this.rname="";
-      this.rpass="";
-      this.rcpass="";
+      this.LRH.height="600px";
     },
     loginRegister:function(){
       if(this.fun==0){
@@ -99,31 +108,34 @@ export default {
         this.$http.get(getUrl).then((res)=>{
           console.log(res);
           var status=res.data;
-          if(status==-3){
+          if(status==-4){
+            this.message="username cannot be null!"
+          }else if(status==-3){
             this.message="password cannot be null!"
           }else if(status==-2){
-            this.message="username cannot be null!"
-          }else if(status==-1){
             this.message="Please Check User Name! ";
+          }else if(status==-1){
+            this.message="User Has ben disabled! "
           }else if(status==0){
             this.message="Please Check Password! "
-          }else if(status==1){
-            this.$emit("loginSuc", this.lname);
-            this.close();
-          }else{
-            this.message="User Has logined! "
+          }else if(status=1){
+              this.message="Login Successfully!";
+              this.$router.push({path:'/guide', 
+              params: {user: this.lname, adm: status==2}});
           }
         })
       }else{
-        var getUrl="/api/RegisterServlet?username="+this.rname+"&password="
+        var getUrl="/api/RegisterServlet?username="+this.rname+"&email="+this.remail+"&password="
         +this.rpass+"&cpassword="+this.rcpass;
         this.$http.get(getUrl).then((res)=>{
           console.log(res);
           var status=res.data;
-          if(status==-3){
-            this.message="password cannot be null!"
+          if(status==-4){
+              this.message="Username Cannot Be Null!"
+          }else if(status==-3){
+            this.message="Check Email Formate!"
           }else if(status==-2){
-            this.message="username cannot be null!"
+            this.message="Password Cannot Be Null!"
           }else if(status==-1){
             this.message="Different Password! ";
           }else if(status==0){
@@ -140,15 +152,44 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.bg{
+    width:100vw;
+    height:100vh;
+    background:#444;
+    overflow:hidden;
+}
+.bg img:hover{
+   opacity:1;
+}
+
+.fg{
+    position:absolute;
+    top:0px;
+    width:100vw;
+    height:100vh;
+    background:#fff;
+    opacity:.7;
+    z-index:100;
+}
+
+.ebook{
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    color:black;
+    opacity:1;
+    z-index:1000;
+}
+
 .login-register {
   background: #000;
-  width: 320px;
-  height: 480px;
+  width: 360px;
   color: #aaa;
   overflow: hidden;
   text-align:center;
-  opacity: 0.96;
-  border-radius: 5px;
+  opacity: 0.8;
+  border-radius: 15px;
   position:absolute;
   left:0;
   right:0;
@@ -162,14 +203,6 @@ export default {
   font-size: 30px;
   color: rgb(163, 196, 204);
   text-align: center;
-}
-
-.return{
-  position:absolute;
-  right:0;
-  margin-right:10px;
-  margin-top:10px;
-  cursor:pointer;
 }
 
 .choose {
@@ -186,7 +219,7 @@ button {
   background: #000;
   color: #aaa;
   cursor: pointer;
-  width: 100px;
+  width: 119px;
 }
 
 
@@ -199,24 +232,31 @@ input {
   background: #000;
 }
 .enter input {
-  width: 180px;
-  margin-bottom: 20px;
+  width: 230px;
+  margin-bottom: 40px;
+  font-size:16px;
 }
 .enter input:hover {
-  border-bottom-color: hsl(182, 89%, 64%);
+  border-bottom-color: rgb(0, 247, 255);
 }
 .enter {
   margin-bottom:20px;
 }
 
 .submit-button button {
-  background: #888;
+  background: #222;
   border-width: 0;
   border-radius: 3px;
-  width: 150px;
-  height: 30px;
+  width: 200px;
+  height: 35px;
+  font-size:16px;
 }
 .submit-button button:hover {
-  background: hsl(182, 89%, 64%);
+  background: hsl(182, 96%, 50%);
 }
+
+.submit-button button:active{
+  background: #222;
+}
+
 </style>

@@ -2,8 +2,8 @@
   <div class="header">
       <span class="ebook" title="change style">ebook</span>
       <input type="text" placeholder="搜索 | 深入理解计算机系统" />
-    <p class="login-register">
-        <span @click="tologin" class="iconfont">&#xe621; 
+    <p class="logout">
+        <span @click="tologout" class="iconfont">&#xe621; 
             <span style="font-size:15px;color:orange">{{user}}</span>
         </span> 
         <router-link to="./shopping">
@@ -15,10 +15,10 @@
 
 <script>
 export default {
-  props:['status', 'user'],
+  props:['user'],
   methods:{
-      tologin:function(event){
-          this.$emit('tologin')
+      tologout:function(event){
+          this.$emit('tologout')
           event.preventDefault()
       },
   }
@@ -28,7 +28,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.login-register{
+.logout{
     margin-left:10%;
     float:right;
     margin-top:45px;
@@ -36,7 +36,7 @@ export default {
 }
 
 
-.login-register span{
+.logout span{
     margin-right:40px;
 }
 

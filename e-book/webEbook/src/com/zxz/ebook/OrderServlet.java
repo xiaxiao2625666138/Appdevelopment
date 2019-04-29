@@ -1,7 +1,8 @@
 package com.zxz.ebook;
 
+import com.zxz.jndi.DBUtil;
+import com.zxz.tool.Order;
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +14,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-import com.zxz.jndi.DBUtil;
-
-@WebServlet(name = "LoginRegisterServlet")
-public class LoginRegisterServlet extends HttpServlet {
+@WebServlet(name = "OrderServlet")
+public class OrderServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    // JDBC 驱动名及数据库 URL
 
-    public LoginRegisterServlet() {
+    public OrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,9 +29,6 @@ public class LoginRegisterServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String uname=request.getParameter("username");
-        String upass=request.getParameter("password");
-
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs=null;
@@ -39,34 +36,20 @@ public class LoginRegisterServlet extends HttpServlet {
         // 设置响应内容类型
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        conn=DBUtil.getConnectionByJNDI();
+        conn= DBUtil.getConnectionByJNDI();
 
-        HttpSession session = request.getSession(true);
-        String islogin= (String) session.getAttribute("islogin");
-
+        HttpSession session=request.getSession();
+        String uname=(String)session.getAttribute("username");
         try{
+            // 执行 SQL 查询
             stmt = conn.createStatement();
+
             String sql;
-            if(Integer.valueOf(request.getParameter("fun"))==0) {
-                sql = "SELECT checkUser(\"" + uname + "\", \"" + upass + "\") as statusNum;";
-                session.setAttribute("islogin", 1);
-            }else if(Integer.valueOf(request.getParameter("fun"))==1){
-                    if(request.getParameter("cpassword").equals(upass)) {
-                        sql = "SELECT registerUser(\"" + uname + "\", \"" + upass + "\") as statusNum;";
-                    }else{
-                        out.println(-1);
-                        return;
-                    }
-            }else if(Integer.valueOf(request.getParameter("fun"))==2){
-                sql = "SELECT logoutUser(\"" + uname +"\") as statusNum;";
-                session.setAttribute("islogin", 0);
-            }else{
-                out.println("error");
-                return;
-            }
+            sql = "SELECT * FROM allOrder WHERE user_name=\"" + uname+"\" ORDER BY time;";
             rs = stmt.executeQuery(sql);
-            rs.next();
-            out.println(rs.getInt("statusNum"));
+            JSONArray jsonArr=new JSONArray();
+            Order.printOrder(rs, jsonArr);
+            out.println(jsonArr);
             // 完成后关闭
             DBUtil.closeResource(rs, stmt, conn);
         }catch(Exception err){
@@ -82,4 +65,5 @@ public class LoginRegisterServlet extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
     }
+
 }

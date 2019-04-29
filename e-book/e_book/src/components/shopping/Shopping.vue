@@ -1,7 +1,7 @@
 <template>
     
   <div class="shopping page">
-    <shopping-header></shopping-header>
+    <shopping-header :now="page"></shopping-header>
     <shopping-body></shopping-body>
     <div class="footer">
       <p>Copyright@zxz5141509091</p>
@@ -13,6 +13,11 @@
 import ShoppingHeader from '../books/pages/Header'
 import ShoppingBody from './pages/Body'
 export default {
+  data(){
+    return{
+      page:"shopping",
+    }
+  },
   components:{
     ShoppingHeader,
     ShoppingBody,

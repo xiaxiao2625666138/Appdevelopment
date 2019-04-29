@@ -15,7 +15,7 @@ export default {
   data(){
     return {
       book:{},
-      bid:this.$route.query.bid
+      bid:this.$route.query.bid,
     }
   },
   components:{

@@ -16,7 +16,16 @@
     </filter>
     <filter-mapping>
         <filter-name>CommonFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/page/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>AdmFilter</filter-name>
+        <filter-class>com.zxz.ebook.filter.AdmFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdmFilter</filter-name>
+        <url-pattern>/page/adm/*</url-pattern>
     </filter-mapping>
 
     <servlet>
@@ -36,7 +45,7 @@
 
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
-        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/page/LogoutServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -56,7 +65,7 @@
 
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/HomeServlet</url-pattern>
+        <url-pattern>/page/HomeServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -66,7 +75,7 @@
 
     <servlet-mapping>
         <servlet-name>DetailServlet</servlet-name>
-        <url-pattern>/DetailServlet</url-pattern>
+        <url-pattern>/page/DetailServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -76,7 +85,7 @@
 
     <servlet-mapping>
         <servlet-name>AddOrderServlet</servlet-name>
-        <url-pattern>/AddOrderServlet</url-pattern>
+        <url-pattern>/page/AddOrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -86,7 +95,7 @@
 
     <servlet-mapping>
         <servlet-name>AddBookServlet</servlet-name>
-        <url-pattern>/AddBookServlet</url-pattern>
+        <url-pattern>/page/AddBookServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -96,7 +105,7 @@
 
     <servlet-mapping>
         <servlet-name>ChooseOrderServlet</servlet-name>
-        <url-pattern>/ChooseOrderServlet</url-pattern>
+        <url-pattern>/page/ChooseOrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -106,7 +115,7 @@
 
     <servlet-mapping>
         <servlet-name>ChooseAllOrderServlet</servlet-name>
-        <url-pattern>/ChooseAllOrderServlet</url-pattern>
+        <url-pattern>/page/ChooseAllOrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -116,7 +125,7 @@
 
     <servlet-mapping>
         <servlet-name>DeleteOrderServlet</servlet-name>
-        <url-pattern>/DeleteOrderServlet</url-pattern>
+        <url-pattern>/page/DeleteOrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -126,7 +135,7 @@
 
     <servlet-mapping>
         <servlet-name>PayOrderServlet</servlet-name>
-        <url-pattern>/PayOrderServlet</url-pattern>
+        <url-pattern>/page/PayOrderServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -136,18 +145,67 @@
 
     <servlet-mapping>
         <servlet-name>AllOrderToPaidServlet</servlet-name>
-        <url-pattern>/AllOrderToPaidServlet</url-pattern>
+        <url-pattern>/page/AllOrderToPaidServlet</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>LoginRegisterServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.LoginRegisterServlet</servlet-class>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.OrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>LoginRegisterServlet</servlet-name>
-        <url-pattern>/LoginRegisterServlet</url-pattern>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/page/OrderServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>UserTypeServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.UserTypeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserTypeServlet</servlet-name>
+        <url-pattern>/page/UserTypeServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderStatisticsServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.order.OrderStatisticsServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderStatisticsServlet</servlet-name>
+        <url-pattern>/page/OrderStatisticsServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AllUserServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.userManage.AllUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AllUserServlet</servlet-name>
+        <url-pattern>/page/adm/AllUserServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DisableUserServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.userManage.DisableUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DisableUserServlet</servlet-name>
+        <url-pattern>/page/adm/DisableUserServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OffOnServlet</servlet-name>
+        <servlet-class>com.zxz.ebook.userManage.OffOnServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OffOnServlet</servlet-name>
+        <url-pattern>/page/adm/OffOnServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

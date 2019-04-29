@@ -1,7 +1,7 @@
 <template>
   <div class="books page">
-    <books-header></books-header>
-    <books-body :books='books'></books-body>
+    <books-header :now="page"></books-header>
+    <books-body></books-body>
     <div class="footer">
         <p>Copyright@zxz5141509091</p>
     </div>
@@ -14,20 +14,13 @@ import BooksBody from './pages/Body'
 export default {
   data(){
     return {
-      books:[],
+      page:"books"
     }
   },
   components:{
     BooksHeader,
     BooksBody,
   },
-  mounted(){
-        this.$http.get("/api/HomeServlet").then((res)=>{
-          console.log(res);
-          const data=res.data.bookArr;
-          this.books=data;
-        })
-  }
 }
 </script>
 

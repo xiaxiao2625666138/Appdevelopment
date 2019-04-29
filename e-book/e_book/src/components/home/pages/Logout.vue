@@ -1,9 +1,9 @@
 <template>
-  <div id='logout' class="logout" :style="ToLogout">
-    <p class="iconfont return" @click="close">&#xe658;</p>
+  <div id='logout' class="logout">
+    <p class="iconfont return" @click="tologout">&#xe658;</p>
     <p class="title iconfont">&#xe621;</p>
     <div class="choose">
-      <span style="color:orange">{{name}}</span><br />
+      <span style="color:orange">{{user}}</span><br />
     </div>
     <div>
       <div class="submit-button">
@@ -15,24 +15,22 @@
 
 <script>
 export default {
-  props:['ToLogout', 'name'],
+  props:['user'],
   data:function(){
     return{
-     
     }
   },
   methods:{
-    close:function(){ 
-        this.ToLogout.display="none";
+    tologout:function(event){
+       this.$emit('tologout');
+       event.preventDefault();
     },
     logout:function(){
-        var getUrl="/api/LogoutServlet?username="+this.name;
-        console.log(getUrl);
+        var getUrl="/api/page/LogoutServlet?";
          this.$http.get(getUrl).then((res)=>{
              console.log(res);
         })
-        this.$emit("logoutSuc");
-        this.close();
+        this.$router.push({path:"/"});
     }
   }
 }
@@ -63,6 +61,8 @@ export default {
   color: rgb(163, 196, 204);
   text-align: center;
 }
+
+
 
 .return{
   position:absolute;

@@ -1,11 +1,12 @@
 <template>   
-  <div class="shopping-item" :style="deleteOrder">
+  <div class="shopping-item">
       <p  class="item-button" @click="choose">
         <button :class="{chosen:chosen, notchosen:!chosen}"/>
       </p>
       <div class="item-message">
           <img :src="order.cover"/>
           <div class="order-message" >
+            <p>{{order.ISBN}}</p>
             <p class="order-time">订单时间：{{order.time}}</p>
             <p class="book-name">{{order.book_name}}<span v-if="order.subtitle" class="subtitle"> · {{order.subtitle}}</span></p>
             <p>第 <span class="version">{{order.version}}</span> 版 · <span class="version">{{order.language_name}}</span> 版</p>
@@ -25,9 +26,6 @@ export default {
     return {
       chosen:this.order.chosen=='Y',
       num:this.order.book_num,
-      deleteOrder:{
-        display:"block"
-      }
     }
   },
   methods:{
@@ -38,14 +36,14 @@ export default {
       }else{
         ch="Y";
       }
-      var getUrl="/api/ChooseOrderServlet?order_id="+this.order.order_id
+      var getUrl="/api/page/ChooseOrderServlet?order_id="+this.order.order_id
       +"&chosen="+ch;
           this.$http.get(getUrl).then((res)=>{
-          console.log(res)});
-      this.chosen=!this.chosen;
+          console.log(res);
+          this.chosen=!this.chosen;});
     },
     addBook:function(m){
-      var getUrl="/api/AddBookServlet?order_id="+this.order.order_id
+      var getUrl="/api/page/AddBookServlet?order_id="+this.order.order_id
       +"&addition="+m;
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
@@ -61,10 +59,11 @@ export default {
   clear:both;
   margin-top:2px;
   width:600px;
-  background:black;
   height:160px;
   z-index: 200;
   position:relative;
+  overflow:hidden;
+  border-radius: 20px;
 }
 
 .notchosen{
@@ -72,7 +71,7 @@ export default {
 }
 
 .chosen{
-  background:cadetblue;
+  background:orange;
 }
 
 .item-button{
@@ -80,7 +79,8 @@ export default {
   width:50px;
   display:inline-block;
   position:relative;
-  background:#333;
+  background:#000;
+  opacity: .9;
   cursor:pointer;
 }
 
@@ -98,11 +98,12 @@ export default {
 }
 
 .item-message{
-  background:#333;
+  background:#000;
   display:inline-block;
   width:545px;
   height:160px;
   overflow:hidden;
+  opacity: .9;
 }
 
 .number{

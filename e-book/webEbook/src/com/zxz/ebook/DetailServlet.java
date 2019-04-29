@@ -51,6 +51,8 @@ public class DetailServlet extends HttpServlet {
             jsonObj.put("author_name", rs.getString("author_name"));
             jsonObj.put("translator_name", rs.getString("translator_name"));
             jsonObj.put("press_name", rs.getString("press_name"));
+            jsonObj.put("ISBN", rs.getString("ISBN"));
+            jsonObj.put("inventory", rs.getString("inventory"));
             jsonObj.put("version", rs.getInt("version"));
             jsonObj.put("language_name", rs.getString("language_name"));
             jsonObj.put("cover", rs.getString("cover"));
