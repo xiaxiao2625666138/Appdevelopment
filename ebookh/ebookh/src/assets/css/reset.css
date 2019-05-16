@@ -1,0 +1,196 @@
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+/* remember to define focus styles! */
+:focus {
+	outline: 0;
+}
+
+/* remember to highlight inserts somehow! */
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html{
+	font-size:15px;
+	color:#aaa;
+}
+
+li{
+	display:inline-block;
+}
+
+.icon-font{
+    color:#aaa;
+    cursor:pointer;
+}
+
+.iconfont:hover{
+    color:#444;
+}
+
+/*8888888888888888888888888888888888888888888888888888888888888*/
+.page{
+    width:100%;
+    color:#ccc;
+    background:rgb(248, 252, 231);
+}
+
+.now{
+    color:#555;
+}
+
+
+.block{
+    background:#333;
+}
+
+.header{
+    width:100%;
+    background: rgb(10, 10, 10);
+    overflow:hidden;
+    font-size:18px;
+    height: 80px;
+    box-shadow:0 0 10px 0;
+    z-index:100;
+    opacity:.8;
+}
+
+.ebook{
+    height:80px;
+    line-height:80px;
+    cursor:pointer;
+    font-size:50px;
+    margin-left: 10px;
+    font-family:STHupo;
+}
+
+.ebook:hover{
+    color:#444;
+}
+
+input {
+    width: 250px;
+    height: 24px;
+    background:#333;
+    border-width:0;
+    border-radius:16px;
+    padding-left: 10px;
+    color:#aaa;
+    z-index:100;
+}
+
+.body{
+    padding:80px 10px 80px 10px;
+    width:100%;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.content{
+    margin:0 auto;
+}
+
+img:hover{
+    opacity:0.5;
+}
+
+a{
+    color:#eee;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+a:hover{
+    color:#444;
+}
+
+button{
+    border-width:0;
+    border-radius:15px;
+    background:#222;
+    color:#aaa;
+    z-index:100px;
+    cursor:pointer;
+    padding:6px 10px;
+}
+
+button:hover{
+    background:#444;
+}
+
+ul{
+    list-style:none;
+}
+
+.front{
+    background:#000;
+    opacity:0.8;
+    z-index:10000;
+}
+
+.highlight{
+    font-size:20px;
+    color:orange;
+    font-family:   STCaiyun;
+}
+
+.footer{
+    width:100%;
+    height:100px;
+    background: rgb(39, 41, 41);
+    box-shadow:0 0 10px 0;
+    z-index:100;
+    opacity:.8;
+}
+
+.footer p{
+    padding-top:20px;
+    margin:0 auto;
+    width:200px;
+}
+
+p{
+    margin:0;
+}

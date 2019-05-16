@@ -12,7 +12,7 @@
 
     <filter>
         <filter-name>CommonFilter</filter-name>
-        <filter-class>com.zxz.ebook.filter.CommonFilter</filter-class>
+        <filter-class>com.ebook.filter.CommonFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CommonFilter</filter-name>
@@ -21,7 +21,7 @@
 
     <filter>
         <filter-name>AdmFilter</filter-name>
-        <filter-class>com.zxz.ebook.filter.AdmFilter</filter-class>
+        <filter-class>com.ebook.filter.AdmFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>AdmFilter</filter-name>
@@ -30,7 +30,7 @@
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.loginRegisterLogout.LoginServlet</servlet-class>
+        <servlet-class>com.ebook.loginRegisterLogout.LoginServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -40,7 +40,7 @@
 
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.loginRegisterLogout.LogoutServlet</servlet-class>
+        <servlet-class>com.ebook.loginRegisterLogout.LogoutServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -50,7 +50,7 @@
 
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.loginRegisterLogout.RegisterServlet</servlet-class>
+        <servlet-class>com.ebook.loginRegisterLogout.RegisterServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.HomeServlet</servlet-class>
+        <servlet-class>com.ebook.HomeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -70,7 +70,7 @@
 
     <servlet>
     <servlet-name>DetailServlet</servlet-name>
-    <servlet-class>com.zxz.ebook.DetailServlet</servlet-class>
+    <servlet-class>com.ebook.DetailServlet</servlet-class>
 </servlet>
 
     <servlet-mapping>
@@ -80,7 +80,7 @@
 
     <servlet>
         <servlet-name>AddOrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.AddOrderServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.AddOrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -90,7 +90,7 @@
 
     <servlet>
         <servlet-name>AddBookServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.AddBookServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.AddBookServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -100,7 +100,7 @@
 
     <servlet>
         <servlet-name>ChooseOrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.ChooseOrderServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.ChooseOrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -110,7 +110,7 @@
 
     <servlet>
         <servlet-name>ChooseAllOrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.ChooseAllOrderServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.ChooseAllOrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -120,7 +120,7 @@
 
     <servlet>
         <servlet-name>DeleteOrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.DeleteOrderServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.DeleteOrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -130,7 +130,7 @@
 
     <servlet>
         <servlet-name>PayOrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.shopping.PayOrderServlet</servlet-class>
+        <servlet-class>com.ebook.shopping.PayOrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -140,7 +140,7 @@
 
     <servlet>
         <servlet-name>AllOrderToPaidServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.AllOrderToPaidServlet</servlet-class>
+        <servlet-class>com.ebook.AllOrderToPaidServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -150,7 +150,7 @@
 
     <servlet>
         <servlet-name>OrderServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.OrderServlet</servlet-class>
+        <servlet-class>com.ebook.OrderServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -160,7 +160,7 @@
 
     <servlet>
         <servlet-name>UserTypeServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.UserTypeServlet</servlet-class>
+        <servlet-class>com.ebook.UserTypeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -170,7 +170,7 @@
 
     <servlet>
         <servlet-name>OrderStatisticsServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.order.OrderStatisticsServlet</servlet-class>
+        <servlet-class>com.ebook.order.OrderStatisticsServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -180,7 +180,7 @@
 
     <servlet>
         <servlet-name>AllUserServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.userManage.AllUserServlet</servlet-class>
+        <servlet-class>com.ebook.userManage.AllUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -190,7 +190,7 @@
 
     <servlet>
         <servlet-name>DisableUserServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.userManage.DisableUserServlet</servlet-class>
+        <servlet-class>com.ebook.userManage.DisableUserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -200,7 +200,7 @@
 
     <servlet>
         <servlet-name>OffOnServlet</servlet-name>
-        <servlet-class>com.zxz.ebook.userManage.OffOnServlet</servlet-class>
+        <servlet-class>com.ebook.userManage.OffOnServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>

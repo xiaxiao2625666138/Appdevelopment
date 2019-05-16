@@ -1,0 +1,10 @@
+<hibernate-mapping package="ebook">
+    <class name="Euser" table="euser">
+        <id name="name" column="user_name"/>
+        <property name="password" column="user_password"/>
+        <property name="phone"/>
+        <property name="address"/>
+        <property name="email"/>
+        <property name="disabled"/>
+    </class>
+</hibernate-mapping>

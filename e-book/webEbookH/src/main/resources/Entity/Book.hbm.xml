@@ -1,0 +1,20 @@
+<hibernate-mapping package="ebook">
+    <class name="Book" table="book">
+        <id name="id" column="book_id">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="book_name"/>
+        <property name="subtitle"/>
+        <many-to-one name="publish" column="publish" />
+        <property name="version"/>
+        <property name="language" column="lang"/>
+        <property name="cover"/>
+        <property name="price"/>
+        <property name="inventory"/>
+        <property name="saled"/>
+        <property name="score"/>
+        <property name="score_num"/>
+        <property name="onsale"/>
+        <property name="ISBN"/>
+    </class>
+</hibernate-mapping>

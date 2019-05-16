@@ -1,0 +1,8 @@
+<hibernate-mapping package="ebook">
+    <class name="Press" table="press">
+        <id name="id" column="press_id" >
+            <generator class="native"/>
+        </id>
+        <property name="name" column="press_name"/>
+    </class>
+</hibernate-mapping>
