@@ -73,12 +73,15 @@ li{
 /*8888888888888888888888888888888888888888888888888888888888888*/
 .page{
     width:100%;
-    color:#ccc;
-    background:rgb(248, 252, 231);
+    color:#000;
+    background:#fff;
 }
 
 .now{
-    color:#555;
+    box-shadow:0 0 10px 0;
+    border-radius: 5px;
+    box-shadow:0 0 30px 0;
+    color:rgb(7, 196, 253);
 }
 
 
@@ -86,24 +89,16 @@ li{
     background:#333;
 }
 
-.header{
-    width:100%;
-    background: rgb(10, 10, 10);
-    overflow:hidden;
-    font-size:18px;
-    height: 80px;
-    box-shadow:0 0 10px 0;
-    z-index:100;
-    opacity:.8;
-}
-
 .ebook{
-    height:80px;
-    line-height:80px;
     cursor:pointer;
     font-size:50px;
-    margin-left: 10px;
     font-family:STHupo;
+    height:50px;
+    line-height:50px;
+    color:rgba(0, 0, 0, 0.89);
+    position: absolute;
+    left:20px;
+    top:10px;
 }
 
 .ebook:hover{
@@ -117,19 +112,19 @@ input {
     border-width:0;
     border-radius:16px;
     padding-left: 10px;
-    color:#aaa;
+    color:#000;
     z-index:100;
 }
 
 .body{
-    padding:80px 10px 80px 10px;
+    padding:80px 0;
     width:100%;
     overflow: auto;
     white-space: nowrap;
 }
 
 .content{
-    margin:0 auto;
+    left:27%;
 }
 
 img:hover{
@@ -149,8 +144,9 @@ a:hover{
 button{
     border-width:0;
     border-radius:15px;
-    background:#222;
-    color:#aaa;
+    background:rgb(66, 190, 228);
+    box-shadow:0 0 15px 0;
+    color:#000;
     z-index:100px;
     cursor:pointer;
     padding:6px 10px;
@@ -178,11 +174,9 @@ ul{
 
 .footer{
     width:100%;
-    height:100px;
-    background: rgb(39, 41, 41);
+    height:60px;
+    color:#000;
     box-shadow:0 0 10px 0;
-    z-index:100;
-    opacity:.8;
 }
 
 .footer p{

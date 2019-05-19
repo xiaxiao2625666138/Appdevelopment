@@ -24,5 +24,10 @@ public class BookServiceImpl implements BookService {
         return bookDao.findByNameContaining(name);
     }
 
+    @Override
+    public Book lookBook(int id) {
+        return bookDao.findById(id);
+    }
+
 
 }

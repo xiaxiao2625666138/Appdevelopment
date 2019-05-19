@@ -13,8 +13,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

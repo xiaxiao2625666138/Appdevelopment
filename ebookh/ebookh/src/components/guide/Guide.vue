@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <img src="@/assets/img/guide.jpg" style="width:100%"/>
+    <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
     <span class="ebook">ebook</span>
     <div class="fun">
@@ -108,19 +108,19 @@ export default {
     width:300px;
     height:40px;
     background:#000;
-    opacity: .8;
     border-radius: 10px;
     color:#aaa;
     font-size:16px;
     cursor:pointer;
+    box-shadow: 0 0 50px 0;
 }
 
 input:hover{
-    opacity:1;
+    opacity:.5;
 }
 
 input:active{
-    opacity:.4;
+    opacity:1;
 }
 
 

@@ -20,5 +20,4 @@ public interface EuserService {
     public List<Order> getOrders(String username);
     public String logout(HttpServletRequest request);
     public int userType(HttpServletRequest request);
-
 }

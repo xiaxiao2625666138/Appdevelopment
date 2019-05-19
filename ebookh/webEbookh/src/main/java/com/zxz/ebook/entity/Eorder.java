@@ -29,7 +29,7 @@ public class Eorder {
     public Eorder(){}
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="order_id")
     public int getId() {
         return id;
@@ -49,7 +49,7 @@ public class Eorder {
 
     @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="book_id",referencedColumnName="book_id",nullable=false)
-    @JsonIgnoreProperties(value={"id", "publish", "inventory", "saled","onsale", "score", "score_num", })
+    @JsonIgnoreProperties(value={"id", "publish", "saled","onsale", "score", "score_num", })
     public Book getBook() {
         return book;
     }
@@ -77,7 +77,7 @@ public class Eorder {
 
     @Basic
     @Column(name="time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public Timestamp getTime() {
         return time;
     }

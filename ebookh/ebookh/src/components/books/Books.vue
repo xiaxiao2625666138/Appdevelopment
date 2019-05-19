@@ -1,5 +1,8 @@
 <template>
   <div class="books page">
+    <router-link to="./guide" class="ebook">
+        <p >ebook</p>
+    </router-link>
     <books-header :now="page"></books-header>
     <books-body></books-body>
     <div class="footer">

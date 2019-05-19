@@ -1,5 +1,6 @@
 package com.zxz.ebook.daoimpl;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zxz.ebook.dao.BookDao;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.repository.BookRespository;
@@ -15,6 +16,7 @@ public class BookDaoImpl implements BookDao {
     private BookRespository bookRespository;
 
     @Override
+    @JsonIgnoreProperties(value = {"version", "language", "price", "saled", "score", "score_num", "onsale"})
     public List<Book> findAll() {
         return bookRespository.findAll();
     }
@@ -22,5 +24,10 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> findByNameContaining(String name) {
         return bookRespository.findByNameContaining(name);
+    }
+
+    @Override
+    public Book findById(int id) {
+        return bookRespository.getOne(id);
     }
 }

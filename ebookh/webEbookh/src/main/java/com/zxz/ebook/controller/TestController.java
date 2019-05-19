@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
@@ -70,6 +71,11 @@ public class TestController {
     }
     */
 
+    @RequestMapping(value="/lookAllBook")
+    public List<Book> lookAllBook(){
+        return bookService.lookAllBook();
+    }
+
 
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response){
@@ -101,9 +107,64 @@ public class TestController {
         return writerService.LookBookByAuthor(authorName);
     }
 
+    @RequestMapping("/lookBookById")
+    public Book lookBookById(int id){
+        return bookService.lookBook(id);
+    }
+
+    @RequestMapping("user/addEorder")
+    public String addEorder(HttpServletRequest request){
+        int bookid=Integer.valueOf(request.getParameter("bookid"));
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        return eorderService.addEorder(bookid, username);
+    }
+
     @RequestMapping("/getPersonalCart")
-    public List<Eorder> getPersonalCart(String username){
+    public List<Eorder> getPersonalCart(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
         return euserService.getCart(username);
+    }
+
+    @RequestMapping("/user/choseEorder")
+    public String choseEorder(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        int orderid=Integer.valueOf(request.getParameter("orderid"));
+        String chosen=request.getParameter("chosen");
+        return eorderService.choseEorder(orderid, username, chosen);
+    }
+
+    @RequestMapping("/user/choseAllEorder")
+    public String choseAllEorder(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        String chosen=request.getParameter("chosen");
+        return eorderService.choseAllEorder(username, chosen);
+    }
+
+    @RequestMapping("/user/addBookNumber")
+    public int addBookNumber(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        int orderid=Integer.valueOf(request.getParameter("orderid"));
+        int add=Integer.valueOf(request.getParameter("add"));
+        return eorderService.addBookNumber(orderid, username, add);
+    }
+
+    @RequestMapping("/user/deleteEorder")
+    public String deleteEorder(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        return eorderService.deleteEorderFromCart(username);
+    }
+
+    @RequestMapping("user/payOrder")
+    public float payEorder(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        return eorderService.payOrder(username);
     }
 
     @ResponseBody

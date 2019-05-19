@@ -1,7 +1,5 @@
 <template >   
   <div class="shopping-body">
-    <img class="background" src="@/assets/img/bg.jpg" />
-    <div class="foreground"></div>
     <div class="shopping-logo">
         <span class="iconfont">&#xe600;</span>
     </div>
@@ -15,7 +13,8 @@
     </div>
     <div class="shopping-items">
       <shopping-item ref="item"
-      v-for="order in orders" :order="order" :key="order.order_id"></shopping-item>
+      v-for="order in orders" :order="order"
+      :key="order.order_id" v-if="order.book_num>0"></shopping-item>
     </div>
     <div v-if="orders[0]" class="fun">
       <input type="button" class="choose-all" @click="chooseAll" value="全选"/>
@@ -39,20 +38,16 @@ export default {
   },
   methods:{
       getOrderList:function(){
-        this.$http.get("/api/page/AllOrderToPaidServlet").then((res)=>{
+        this.$http.get("http://localhost:8080/ebook/getPersonalCart").then((res)=>{
           console.log(res);
-          if(res.data==302){
-            this.$router.push({path:"/"});
-          }else{
             this.orders=res.data;
-          }
         })
       },
       chooseAll:function(){
           this.$refs.item.forEach((it, index)=>{
             it.chosen=true;
           });
-          var getUrl="/api/page/ChooseAllOrderServlet?chosen=Y";
+          var getUrl="http://localhost:8080/ebook/user/choseAllEorder?chosen=Y";
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
       },
@@ -60,19 +55,19 @@ export default {
           this.$refs.item.forEach((it, index)=>{
             it.chosen=false;
           });
-          var getUrl="/api/page/ChooseAllOrderServlet?chosen=N";
+          var getUrl="http://localhost:8080/ebook/user/choseAllEorder?chosen=N";
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
       },
       deleteOrder:function(){
-        var getUrl="/api/page/DeleteOrderServlet";
+        var getUrl="http://localhost:8080/ebook/user/deleteEorder";
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           this.getOrderList();
           });
       },
       payOrder:function(){
-        var getUrl="/api/page/PayOrderServlet";
+        var getUrl="http://localhost:8080/ebook/user/payOrder";
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           alert("支付 ￥"+res.data+"!");
@@ -90,27 +85,14 @@ export default {
 <style scoped>
 .shopping-body{
   margin:0 auto;
-  width:601px;
-  height:780px;
-  padding: 60px 0;
+  width:603px;
+  height:830px;
   overflow:hidden;
   position:relative;
-  border-radius:30px;
-}
-
-.background{
-  position:absolute;
-  width:100%;
-  border-radius:30px;
-}
-.foreground{
-  width:100%;
-  height:100%;
-  border-radius:30px;
-  position:absolute;
-  background:#fff;
-  opacity: .5;
-  z-index:5;
+  border-radius:10px;
+  box-shadow:0 0 50px 0;
+  margin-top:100px;
+  margin-left:27%;
 }
 
 .nothing{
@@ -143,46 +125,46 @@ export default {
 .shopping-logo{
   margin:0 auto;
   display:block;
-  width:40px;
-  height:40px;
-  background:#000;
+  width:30px;
+  height:30px;
   z-index:10000;
   opacity:0.9;
   border-radius:100px;
   padding:15px;
   margin-top:20px;
+  margin-bottom:20px;
+  box-shadow:0 0 30px 0;
+  background:rgb(20, 188, 255);
 }
 .iconfont{
-  font-size:40px;
-  color:cadetblue;;
-  line-height:40px;
+  font-size:30px;
+  line-height:30px;
 }
 
 .shopping-items{
    width:620px;
    height:650px;
    overflow:auto;
-   margin-top:20px;
    margin:1px;
 }
+
 .fun{
-  position:absolute;
-  bottom:40px;
-  margin-top:2px;
-  z-index:1000;
-  overflow:hidden;
+  position: absolute;
+  bottom:30px;
 }
+
 .fun input{
   border-radius: 10px;
   height:35px;
   font-size:15px;
   cursor:pointer;
-  background:#000;
-  opacity: .8;
+  background:rgb(20, 188, 255);
+  box-shadow:0 0 15px 0;
 }
 
 .fun input:hover{
-  background:#333;
+  opacity:0.5;
+  color:#fff;
 }
 
 .fun input:active{

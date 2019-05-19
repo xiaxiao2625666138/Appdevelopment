@@ -1,16 +1,17 @@
 <template>   
   <div class="shopping-item">
-      <p  class="item-button" @click="choose">
-        <button :class="{chosen:chosen, notchosen:!chosen}"/>
+      <p class="item-button">
+        <button :class="{chosen:order.chosen=='Y', notchosen:order.chosen=='N'}"
+           @click="choose"/>
       </p>
       <div class="item-message">
-          <img :src="order.cover"/>
+          <img :src="order.book.cover"/>
           <div class="order-message" >
-            <p>{{order.ISBN}}</p>
+            <p>{{order.book.ISBN}}</p>
             <p class="order-time">订单时间：{{order.time}}</p>
-            <p class="book-name">{{order.book_name}}<span v-if="order.subtitle" class="subtitle"> · {{order.subtitle}}</span></p>
-            <p>第 <span class="version">{{order.version}}</span> 版 · <span class="version">{{order.language_name}}</span> 版</p>
-            <p>价格：<span class="price">￥{{order.price}}</span></p>
+            <p class="book-name">{{order.book.name}}<span v-if="order.subtitle" class="subtitle"> · {{order.subtitle}}</span></p>
+            <p>第 <span class="version">{{order.book.version}}</span> 版 · <span class="version">{{order.book.language}}</span> 版</p>
+            <p>价格：<span class="price">￥{{order.book.price}}</span></p>
           </div>
       </div>
       <div class="number">
@@ -24,30 +25,32 @@ export default {
   props:['order'],
   data(){
     return {
-      chosen:this.order.chosen=='Y',
       num:this.order.book_num,
     }
   },
   methods:{
     choose:function(){
       var ch;
-      if(this.chosen){
+      if(this.order.chosen=='Y'){
+        this.order.chosen='N';
         ch="N";
       }else{
+        this.order.chosen='Y';
         ch="Y";
       }
-      var getUrl="/api/page/ChooseOrderServlet?order_id="+this.order.order_id
+      var getUrl="http://localhost:8080/ebook/user/choseEorder?orderid="+this.order.id
       +"&chosen="+ch;
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           this.chosen=!this.chosen;});
     },
     addBook:function(m){
-      var getUrl="/api/page/AddBookServlet?order_id="+this.order.order_id
-      +"&addition="+m;
+      var getUrl="http://localhost:8080/ebook/user/addBookNumber?orderid="+this.order.id
+      +"&add="+m;
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
-          this.num=res.data;});
+          this.num=res.data;
+          this.order.book_num=res.data;});
     }
   }
 }
@@ -57,21 +60,25 @@ export default {
 <style scoped>
 .shopping-item{
   clear:both;
-  margin-top:2px;
+  margin-top:10px;
+  margin-bottom:10px;
   width:600px;
   height:160px;
   z-index: 200;
   position:relative;
   overflow:hidden;
-  border-radius: 20px;
+  border-radius: 8px;
+  box-shadow:0 0 10px 0;
+  z-index:100000;
 }
 
-.notchosen{
-    background:black;
+.item-button .chosen{
+  background:rgb(4, 164, 228);
+  color:rgb(4, 164, 228);
 }
 
-.chosen{
-  background:orange;
+.item-button .notchosen{
+  background:#fff;
 }
 
 .item-button{
@@ -79,13 +86,6 @@ export default {
   width:50px;
   display:inline-block;
   position:relative;
-  background:#000;
-  opacity: .9;
-  cursor:pointer;
-}
-
-.item-button:hover{
-  background:cadetblue;
 }
 
 .item-button button{
@@ -98,7 +98,6 @@ export default {
 }
 
 .item-message{
-  background:#000;
   display:inline-block;
   width:545px;
   height:160px;
@@ -112,6 +111,8 @@ export default {
   overflow:hidden;
   bottom:10px;
   right:10px;
+  box-shadow:0 0 15px 0;
+  color:rgb(4, 164, 228);
 }
 
 .number input{
@@ -119,24 +120,26 @@ export default {
   display:inline-block;
   text-align:center;
   height:26px;
+  background:rgb(4, 164, 228);
+  color:#fff;
 }
 
 .jian, .jia{
   width: 35px;
   cursor:pointer;
-  background:#222;
 }
 
 .jian:hover, .jia:hover{
-  background:#000;
-  opacity:0.85;
+  opacity:0.6;
+}
+
+.number input:active{
+  background:cadetblue;
 }
 
 .shu{
   width:50px;
   text-align:center;
-  background:#000;
-  opacity:0.85;
 }
 
 

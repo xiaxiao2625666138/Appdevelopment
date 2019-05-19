@@ -1,28 +1,25 @@
 <template>
-  <div class="header">
-      <router-link to="./guide" class="ebook">
-        <span >ebook</span>
-      </router-link>
+  <div class="guide">
       <router-link to="./books">
-        <span :class="{now: now=='books'}" title="暂时还没有收藏功能">图书浏览</span>
+        <p :class="{now: now=='books'}" title="暂时还没有收藏功能">图书浏览</p>
       </router-link>
       <router-link v-if="!adm" to="./shopping">
-        <span :class="{now: now=='shopping'}">购物车</span>
+        <p :class="{now: now=='shopping'}">购物车</p>
       </router-link>
       <router-link v-if="adm" to="./userManage">
-        <span :class="{now: now=='userManage'}">用户管理</span>
+        <p :class="{now: now=='userManage'}">用户管理</p>
       </router-link>
       <router-link to="./daijian">
-        <span title="暂时还没有推荐功能">求推荐</span>
+        <p title="暂时还没有推荐功能">求推荐</p>
       </router-link>
       <router-link v-if="!adm" to="./order">
-        <span :class="{now: now=='order'}">我的订单</span>
+        <p :class="{now: now=='order'}">我的订单</p>
       </router-link>
       <router-link v-if="adm" to="./order">
-        <span :class="{now: now=='order'}">订单管理</span>
+        <p :class="{now: now=='order'}">订单管理</p>
       </router-link>
       <router-link to="./setting">
-        <span :class="{now: now=='setting'}">设置</span>
+        <p :class="{now: now=='setting'}">设置</p>
       </router-link>
     </div>
 </template>
@@ -38,7 +35,7 @@ export default {
   },
 
   mounted(){
-    this.$http.get("/api/page/UserTypeServlet").then((res)=>{
+    this.$http.get("http://localhost:8080/ebook/userType").then((res)=>{
         this.user=res.data.user;
         this.adm=res.data.islogin==2;
     })
@@ -48,16 +45,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.header span{
-    margin-right:5%;
-    cursor:pointer;
+.guide{
+  padding:20px 0;
+  top:150px;
+  left:80px;
+  position:absolute;
+  background:#fff;
+  z-index: 10000;
+  border-radius: 10px;
+  box-shadow:0 0 30px 0;
+  width:160px;
+  font-size:20px;
+  text-align:center;
+}
+.guide a{
+  color:#000;
+}
+.guide p{
+  height:40px;
+  line-height: 40px;
 }
 
-.header span:hover{
-    color:#555;
+.guide p:hover{
+  box-shadow:0 0 15px 0;
+  border-radius: 5px;
 }
 
-.ebook{
-    margin-right:20%;
-}
 </style>

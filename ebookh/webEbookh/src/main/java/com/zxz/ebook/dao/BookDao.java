@@ -6,4 +6,5 @@ import java.util.List;
 public interface BookDao {
     List<Book> findAll();
     List<Book> findByNameContaining(String name);
+    Book findById(int id);
 }

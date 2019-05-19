@@ -1,6 +1,6 @@
 <template>
   <div class="bg">
-    <img src="@/assets/img/bg.jpg" style="width:100%"/>
+    <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
     <span class="ebook">ebook</span>
   <div id='login-register' class="login-register" :style="LRH">
@@ -162,10 +162,8 @@ export default {
 .login-register {
   background: #000;
   width: 360px;
-  color: #aaa;
   overflow: hidden;
   text-align:center;
-  opacity: 0.8;
   border-radius: 15px;
   position:absolute;
   left:0;
@@ -174,6 +172,7 @@ export default {
   bottom:0;
   margin: auto;
   z-index:1000;
+  box-shadow: 0 0 50px 0;
 }
 .title {
   margin:50px 0 20px 0;
@@ -197,6 +196,7 @@ button {
   color: #aaa;
   cursor: pointer;
   width: 119px;
+  box-shadow: 0 0 0 0;
 }
 
 
@@ -207,6 +207,7 @@ input {
   border-bottom-color: #444;
   border-radius:0;
   background: #000;
+  color: #aaa;
 }
 .enter input {
   width: 230px;

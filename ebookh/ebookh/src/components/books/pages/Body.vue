@@ -11,31 +11,30 @@
              type="text" placeholder="搜索 | 深入理解计算机系统"/>
          </div>
          <detail-book v-if="lookDetail" :book="detailBook"></detail-book>
-         <div class="book-list block">
+         <div class="book-list">
             <ul class="bl">
                <li v-for="item in books">
                    <div class="item">
-                      <img @mouseover="detail(item.book_id)" 
+                      <img @mouseover="detail(item.id)" 
                       @mouseout="closeDetail" :src="item.cover" />
                       <div class="browse">
                           <p class="isbn">
-                              ISBN: {{item.ISBN}}
+                              ISBN: {{item.isbn}}
                           </p>
                           <p>
-                              <span class="bookname">{{item.book_name}}</span> 
+                              <span class="bookname">{{item.name}}</span> 
                               <span v-if="item.subtitle"> · {{item.subtitle}}</span>
                           </p>
                           <p>
-                              <span >{{item.author_name}}</span>
-                              <span v-if="item.author1_name"> | {{item.author1_name}}</span>
-                              <span v-if="item.author2_name"> | {{item.author2_name}}</span>
-                              <span v-if="item.author3_name"> | {{item.author3_name}}</span>
+                              <span v-for="(author, index) in item.authors">
+                                  <span v-if="index!=0"> | </span>{{author.name}}
+                              </span>
                           </p>
                           <p>
                               库存 <span class="inventory">{{item.inventory}}</span> 本！
                           </p>
                           <button class="iconfont gouwuche" v-if="!adm"
-                          @click="addOrder(item.book_id)">
+                          @click="addOrder(item.id)">
                               &#xe60c;
                           </button>
                           <div v-if="adm" class="manage">
@@ -68,10 +67,10 @@ export default {
             ready:false,
             books:[],
             byauthor:{
-                color:'#aaa',
+                color:'#000',
             },
             bybookname:{
-                color:'#aaa',
+                color:'#000',
             },
             detailBook:{},
             lookDetail:false,
@@ -81,15 +80,19 @@ export default {
     },
     methods:{
         bookBrowse:function(){
-            var getURL="/api/page/HomeServlet?filter="+this.filter+"&"+this.filter+"="+this.condition;
-            console.log(getURL);
+            var getURL="http://localhost:8080/ebook/";
+            if(this.filter=="bookname"){
+                getURL=getURL+"lookBookLike?bookname="+this.condition;
+            }else{
+                getURL=getURL+"lookBookBy?authorName="+this.condition;
+            }
             this.$http.get(getURL).then((res)=>{
             console.log(res);
-            this.books=res.data.bookArr;
+            this.books=res.data;
             })
         },
         addOrder:function(book_id){
-          var getUrl="/api/page/AddOrderServlet?book_id="+book_id;
+          var getUrl="http://localhost:8080/ebook/user/addEorder?bookid="+book_id;
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
         },
@@ -97,15 +100,15 @@ export default {
             this.filter=fil;
             if(fil=="bookname"){
                 this.bybookname.color='orange';
-                this.byauthor.color='#aaa';
+                this.byauthor.color='#000';
             }else{
                 this.byauthor.color='orange';
-                this.bybookname.color='#aaa';
+                this.bybookname.color='#000';
             }
             this.bookBrowse();
         },
-        detail:function(book_id){
-            this.$http.get("/api/page/DetailServlet?book_id="+book_id).then((res)=>{
+        detail:function(id){
+            this.$http.get("http://localhost:8080/ebook/lookBookById?id="+id).then((res)=>{
             this.detailBook=res.data;
             this.lookDetail=true;
             })
@@ -122,18 +125,18 @@ export default {
         }
     },
     mounted(){
-      this.$http.get("/api/page/UserTypeServlet").then((res)=>{
+      this.$http.get("http://localhost:8080/ebook/userType").then((res)=>{
           console.log(res);
-          if(res.data==302){
+          if(res.data==0){
               this.$router.push({path: '/'});
           }else{
               this.user=res.data.user;
               this.adm=res.data.islogin==2;
           }
        });
-        this.$http.get("/api/page/HomeServlet?filter=all").then((res)=>{
+        this.$http.get("http://localhost:8080/ebook/lookAllBook").then((res)=>{
           console.log(res);
-          this.books=res.data.bookArr;
+          this.books=res.data;
       });
     }
 }
@@ -142,25 +145,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content{
-    width:1122px;
+    width:747px;
     height:870px;
     position:relative;
-    background:black;
-    border-radius:30px;
     overflow:hidden;
-}
-
-.header span+span{
-    margin-right:5%;
-    cursor:pointer;
-}
-
-.header span+span:hover{
-    color:#333;
-}
-
-.ebook{
-    margin-right:20%;
+    z-index: 100;
+    border-radius: 10px;
+    box-shadow:0 0 50px 0;
 }
 
 .classify{
@@ -168,7 +159,6 @@ export default {
     height:100%;
     white-space:normal;
     margin:10px 0 20px 0;
-
 }
 
 .select{
@@ -181,6 +171,7 @@ export default {
     width:110px;
     height:30px;
     margin-left:20px;
+    color:#000;
 }
 
 .select .add{
@@ -196,10 +187,12 @@ input{
     border-radius:16px;
     height:28px;
     width:300px;
+    background:#fff;
+    box-shadow:0 0 10px 0;
 }
 
-.block{
-    background:none;
+input:focus{
+    color:rgb(12, 195, 250);
 }
 
 img{
@@ -210,7 +203,7 @@ img{
 
 .book-list{
     clear:both;
-    width:1120px;
+    width:780px;
     height:708px;
     overflow:hidden;
 }
@@ -219,17 +212,18 @@ img{
     overflow-x:hidden;
     overflow-y:auto;
     white-space:normal;
-    width:1150px;
+    width:780px;
     height:710px;
     z-index:10000;
 }
 
 .item{
-    background:#333;
     margin:2px;
     height:171px;
     overflow:hidden;
     border-radius:7px;
+    z-index:1000;
+    box-shadow:0 0 15px 0;
 }
 
 button{
@@ -305,5 +299,6 @@ button:active{
 .manage button{
     width:60px;
 }
+
 
 </style>

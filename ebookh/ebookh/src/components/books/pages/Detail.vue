@@ -3,17 +3,17 @@
         <img :src="book.cover" />
         <div class="book-message">
             <p class="highlight score"> {{book.score}} </p>
-            <p class="isbn">ISBN: {{book.ISBN}}</p>
+            <p class="isbn">ISBN: {{book.isbn}}</p>
             <p>
-                <span class="book-name">{{book.book_name}}</span>
+                <span class="book-name">{{book.name}}</span>
                 <span v-if="book.subtitle"> · 
                     <span class="subtitle">{{book.subtitle}}</span>
                 </span>
             </p>
-            <p>作者：{{book.author_name}}
-                <span v-if="book.author1_name"> | {{book.author1_name}}</span>
-                <span v-if="book.author2_name"> | {{book.author2_name}}</span>
-                <span v-if="book.author3_name"> | {{book.author3_name}}</span>
+            <p>作者: 
+              <span v-for="(author, index) in book.authors">
+                  <span v-if="index!=0"> | </span>{{author.name}}
+              </span>
             </p>
             <p v-if="book.translator_name">译者：{{book.translator_name}}
                 <span v-if="book.translator1_name"> | {{book.translator1_name}}</span>
@@ -21,8 +21,8 @@
                 <span v-if="book.translator3_name"> | {{book.translator3_name}}</span>
             </p>
             <p>版本：第{{book.version}}版</p>
-            <p>语言：{{book.language_name}}</p>
-            <p>出版：{{book.press_name}} </p>
+            <p>语言：{{book.language}}</p>
+            <p>出版：{{book.publish}} </p>
             <p class="logo">
                 <button v-for="logo in book.logo">{{book.logos}}</button>
             </p>
@@ -55,12 +55,12 @@ img {
 }
 
 .isbn{
-    color:#666;
+    color:#000;
 }
 
 .this-book {
   position: absolute;
-  background:#000;
+  background:#fff;
   z-index: 10000;
   left:0;
   right:0;
@@ -70,8 +70,8 @@ img {
   padding: 20px;
   width:440px;
   height:240px;
-  opacity:.92;
-  border-radius:8px;
+  border-radius: 10px;
+  box-shadow:0 0 100px 0;
 }
 
 .this-book img {

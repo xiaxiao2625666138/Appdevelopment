@@ -1,6 +1,9 @@
 <template>
     
   <div class="shopping page">
+    <router-link to="./guide" class="ebook">
+        <p >ebook</p>
+    </router-link>
     <shopping-header :now="page"></shopping-header>
     <shopping-body></shopping-body>
     <div class="footer">

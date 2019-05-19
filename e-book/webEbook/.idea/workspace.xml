@@ -6,32 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbb1ef2e-da1d-47ad-805d-13d67093163c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/AllOrderToPaidServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/AllOrderToPaidServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/DetailServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/DetailServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/HomeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/OrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/OrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/UserTypeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/UserTypeServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/filter/AdmFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/filter/AdmFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/filter/CommonFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/filter/CommonFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/loginRegisterLogout/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/loginRegisterLogout/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/loginRegisterLogout/LogoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/loginRegisterLogout/LogoutServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/loginRegisterLogout/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/loginRegisterLogout/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/order/OrderStatisticsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/order/OrderStatisticsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/AddBookServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/AddBookServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/AddOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/AddOrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/ChooseAllOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/ChooseAllOrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/ChooseOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/ChooseOrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/DeleteOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/DeleteOrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/shopping/PayOrderServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/shopping/PayOrderServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/userManage/AllUserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/userManage/AllUserServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/userManage/DisableUserServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/userManage/DisableUserServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/ebook/userManage/OffOnServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ebook/userManage/OffOnServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/jndi/DBUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/jndi/DBUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/zxz/tool/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/tool/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bbb1ef2e-da1d-47ad-805d-13d67093163c" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -221,7 +196,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="7" />
     <option name="y" value="32" />
     <option name="width" value="1593" />
@@ -434,7 +409,7 @@
     <option name="totallyTimeSpent" value="147570000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="26" width="1274" height="784" extended-state="1" />
+    <frame x="6" y="26" width="1274" height="784" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8385269" visible="true" weight="0.16036184" />
@@ -447,7 +422,7 @@
       <window_info id="Web" order="7" sideWeight="0.15635179" side_tool="true" weight="0.20510836" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.23664123" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13957055" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.13957055" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
