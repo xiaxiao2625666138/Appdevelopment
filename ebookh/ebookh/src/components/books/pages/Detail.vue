@@ -15,14 +15,14 @@
                   <span v-if="index!=0"> | </span>{{author.name}}
               </span>
             </p>
-            <p v-if="book.translator_name">译者：{{book.translator_name}}
-                <span v-if="book.translator1_name"> | {{book.translator1_name}}</span>
-                <span v-if="book.translator2_name"> | {{book.translator2_name}}</span>
-                <span v-if="book.translator3_name"> | {{book.translator3_name}}</span>
+            <p v-if="book.translators[0]">译者: 
+              <span v-for="(translator, index) in book.translators">
+                  <span v-if="index!=0"> | </span>{{translator.name}}
+              </span>
             </p>
             <p>版本：第{{book.version}}版</p>
             <p>语言：{{book.language}}</p>
-            <p>出版：{{book.publish}} </p>
+            <p>出版：{{book.publish.name}} </p>
             <p class="logo">
                 <button v-for="logo in book.logo">{{book.logos}}</button>
             </p>
@@ -52,6 +52,7 @@ export default {
 <style scoped>
 img {
   margin: 0;
+  box-shadow: 0 0 20px 0;
 }
 
 .isbn{

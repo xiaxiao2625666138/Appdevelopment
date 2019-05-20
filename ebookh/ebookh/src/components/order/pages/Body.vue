@@ -1,7 +1,5 @@
 <template>
   <div class="body">
-   <img class="background" src="@/assets/img/bg.jpg" />
-   <div class="foreground"></div>
    <div class="ebook">order</div>
    <div class="filter" >
      <input type="text" placeholder="2000-01-01 12:00:00" v-model="time1"/>
@@ -14,20 +12,20 @@
          || (order.time<=time2 && time1=='') 
          || (order.time>=time1 &&time2=='')" 
          class="order" >
-          <p class="order-id">{{order.user_name}} | {{order.time}}</p>
-          <div v-for="book in order.books"
+          <p class="order-id">{{order.username}} | {{order.time}}</p>
+          <div v-for="eorder in order.eorders"
                class="book">
-            <img :src="book.cover"/>
+            <img :src="eorder.book.cover"/>
             <div class="message">
-              <p class="ISBN">ISBN: {{book.ISBN}}</p>
+              <p class="ISBN">ISBN: {{eorder.book.isbn}}</p>
               <p>
-                <span class="book-name">{{book.book_name}}asdfasdfasdfasdfasdf</span>
-                <span v-if="book.subtitle" class="subtitle"> · {{book.subtitle}}</span>
+                <span class="book-name">{{eorder.book.name}}</span>
+                <span v-if="eorder.book.subtitle" class="subtitle"> · {{eorder.book.subtitle}}</span>
               </p>
-              <p>第 {{book.version}} 版 · {{book.language_name}} 版</p>
+              <p>第 {{eorder.book.version}} 版 · {{eorder.book.language}} 版</p>
               <p>
-                <span class="price highlight">￥ {{book.price}}</span>
-                &emsp;购买 <span class="highlight">{{book.book_num}}</span> 册
+                <span class="price highlight">￥ {{eorder.book.price}}</span>
+                &emsp;购买 <span class="highlight">{{eorder.book_num}}</span> 册
               </p>
             </div>
           </div>
@@ -40,16 +38,16 @@
        <div>
          <p >用户 <span class="number">{{orderSta.username}}</span></p>
          <p>在
-           <span  class="number" v-if="orderSta.time1!=''">{{orderSta.time1}}</span>
+           <span  class="number" v-if="orderSta.time1!=''">{{orderSta.begin}}</span>
            <span class="number" v-if="orderSta.time1==''">注册</span>
            —
-           <span class="number" v-if="orderSta.time2!=''">{{orderSta.time2}}</span>
+           <span class="number" v-if="orderSta.time2!=''">{{orderSta.end}}</span>
            <span class="number" v-if="orderSta.time2==''">至今</span>
            时间段里
-         </p>
-         <p>购书 <span class="number">{{orderSta.times}} </span>次</p>
-         <p>累计购书 <span class="number">{{orderSta.book_num}}</span> 册</p>
-         <p>共计消费 <span class="highlight">￥{{orderSta.TotalMoney}}</span></p>
+         </p><br />
+         <p>购书 <span class="number">{{orderSta.totalTime}} </span>次</p>
+         <p>累计购书 <span class="number">{{orderSta.totalBooknum}}</span> 册</p>
+         <p>共计消费 <span class="highlight">￥{{orderSta.totalMoney}}</span></p>
        </div>
        <div>
          <span>于 <span class="number">{{orderSta.maxTime}}</span></span>
@@ -58,8 +56,8 @@
      </div>
      <div class="detail" v-for="order in orderSta.orders"
           :class="{max: order.time==orderSta.maxTime}">
-       <p style="width:380px">订单日期：<span>{{order.time}}</span></p>
-       <p style="width:250px">购书 <span>{{order.book_num}}</span> 册</p>
+       <p style="width:350px">订单日期：<span>{{order.time}}</span></p>
+       <p style="width:200px">购书 <span class="highlight">{{order.booknum}}</span> 册</p>
        <p>消费 <span class="highlight">￥{{order.money}}</span></p>
      </div>
      <div class="tail"></div>
@@ -80,7 +78,7 @@ export default {
   },
   methods:{
       getOrderList:function(){
-        this.$http.get("/api/page/OrderServlet").then((res)=>{
+        this.$http.get("http://localhost:8080/ebook/user/getPersonalOrder").then((res)=>{
           console.log(res);
           if(res.data==302){
             this.$router.push({path:"/"});
@@ -90,8 +88,8 @@ export default {
         })
       },
       orderStatistics:function(){
-        var getUrl="api/page/OrderStatisticsServlet?time1="
-        +this.time1+"&time2="+this.time2;
+        var getUrl="http://localhost:8080/ebook/user/getPersonalOrderStatistics?begin="
+        +this.time1+"&end="+this.time2;
         this.$http.get(getUrl).then((res)=>{
           console.log(res);
           this.orderSta=res.data;
@@ -111,19 +109,25 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .body{
-  margin:0 auto;
+  margin-left:20%;
+  margin-top:100px;
+  box-shadow: 0 0 50px 0;
   position:relative;
   width:890px;
   overflow:hidden;
   margin-bottom:80px;
+  border-radius: 10px;
 }
 .ebook{
   left:30px;
   width:30px;
   color:cadetblue;
   z-index:400;
-  top:80px;
+  left:0;
+  right:0;
+  margin:auto;
   position:absolute;
+  text-shadow:0 0 10px 0;
 }
 
 .filter{
@@ -138,8 +142,13 @@ export default {
   width:150px;
   height:30px;
   border-radius:8px;
-  background:#000;
-  opacity: .7;
+  background:#fff;
+  box-shadow: 0 0 20px 0;
+  margin-right:15px;
+}
+
+.filter input:hover{
+  color:rgb(12, 195, 250);
 }
 
 .filter button{
@@ -147,45 +156,23 @@ export default {
   height:30px;
   vertical-align: top;
   border-radius:8px;
-  background:#000;
-  opacity: .7;
-  color:#666;
+  background:rgb(12, 195, 250);
+  box-shadow: 0 0 20px 0;
 }
 .filter button:hover{
-  background:orange;
+  background:rgb(81, 140, 158);
 }
 .filter button:active{
   opacity: .3;
 }
 
 .content{
-  margin:0 auto;
   padding:0 40px;
   width:900px;
   height:1180px;
   z-index:1000;
   overflow:auto;
-  position: relative;
   margin-top:80px;
-}
-
-.background{
-  top:80px;
-  width:890px;
-  opacity:1;
-  position:absolute;
-  z-index:2;
-  border-radius:30px;
-}
-
-.foreground{
-  width:890px;
-  height:1185px;
-  background:#fff;
-  z-index:10;
-  position:absolute;
-  opacity: .4;
-  top:160px;
 }
 
 .book img{
@@ -197,11 +184,10 @@ export default {
   position:absolute;
   width:400px;
   margin:3px;
-  color:#aaa;
   position:relative;
   overflow:hidden;
   border-radius:10px;
-  background:black;
+  box-shadow: 0 0 20px 0;
   opacity:.9;
   z-index:1000;
 }
@@ -214,15 +200,18 @@ export default {
 }
 
 .money{
-   background:black;
+   box-shadow: #000 0 20px 0;
    padding: 10px;
    text-align:right;
 }
 
 .book{
-  background:#222;
   margin:1px;
   width:397px;
+  height:114px;
+  box-shadow: 0 0 10px 0;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .message{
@@ -252,14 +241,14 @@ export default {
 }
 
 .total{
-  background:#000;
-  width:800px;
-  height:60px;
+  box-shadow: 0 0 20px 0;
+  margin-top:10px;
+  width:700px;
+  height:100px;
   opacity: .95;
   padding:5px 0;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  color:#aaa;
   overflow:hidden;
   text-align:center;
   position: relative;
@@ -279,16 +268,16 @@ export default {
 }
 
 .detail{
-  background:#000;
-  opacity: .85;
-  width:800px;
+  box-shadow: 0 0 5px 0;
+  width:700px;
+  margin:5px 0;
   overflow:hidden;
   padding:30px 0;
   margin-bottom:1px;
 }
 
 .detail:hover{
-  opacity: 1;
+  box-shadow: 0 0 50px 0;
 }
 
 .detail p{
@@ -301,16 +290,17 @@ export default {
 
 .tail{
   height:60px;
-  width:800px;
-  background:#000;
+  width:700px;
   opacity:.95;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
+  box-shadow: 0 0 20px 0;
 }
 
 .max{
-  background:rgb(78, 40, 4);
+  background:rgb(12, 195, 250);
 }
+
 
 .close{
   position:absolute;
@@ -318,6 +308,7 @@ export default {
   top:15px;
   font-size:20px;
   cursor:pointer;
+  color:rgb(12, 195, 250);
 }
 
 </style>

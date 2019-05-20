@@ -13,10 +13,7 @@ import java.util.List;
 @Entity
 @Table(name="book", schema="ebookh", catalog="")
 @JsonIgnoreProperties(value={"handler", "hibernateLazyInitializer", "fieldHandler"})
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+
 public class Book {
     private int id;
     private String name;
@@ -165,17 +162,29 @@ public class Book {
     public void setAuthors(List<Writer> authors) {
         this.authors = authors;
     }
-/*
-    private String publish;
-    @ElementCollection(fetch=FetchType.EAGER)
-    @CollectionTable(name="press", joinColumns = {
-            @JoinColumn(name="publish", referencedColumnName = "press_id")})
-    @Column(name="press_name")
-    public String getPublish() {
+
+    private List<Writer> translators;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name="hastranslator", joinColumns=@JoinColumn(name="book_id"),
+            inverseJoinColumns = @JoinColumn(name="writer_id"))
+    @JsonIgnoreProperties(value={"books","id"})
+    public List<Writer> getTranslators() {
+        return translators;
+    }
+    public void setTranslators(List<Writer> translators) {
+        this.translators = translators;
+    }
+
+
+    private Press publish;
+    @ManyToOne(targetEntity=Press.class,fetch=FetchType.LAZY)
+    @JoinColumn(name="publish")
+    @JsonIgnoreProperties(value={"id"})
+    public Press getPublish() {
         return publish;
     }
-    public void setPublish(String publish) {
+    public void setPublish(Press publish) {
         this.publish = publish;
     }
-*/
+
 }

@@ -120,7 +120,7 @@ public class TestController {
         return eorderService.addEorder(bookid, username);
     }
 
-    @RequestMapping("/getPersonalCart")
+    @RequestMapping("/user/getPersonalCart")
     public List<Eorder> getPersonalCart(HttpServletRequest request){
         HttpSession session=request.getSession(true);
         String username=(String)session.getAttribute("username");
@@ -168,14 +168,20 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping("/getPersonalOrder")
-    public List<Order> getPersonalOrder(String username){
+    @RequestMapping("/user/getPersonalOrder")
+    public List<Order> getPersonalOrder(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
         return euserService.getOrders(username);
     }
 
     @ResponseBody
-    @RequestMapping("/getPersonalOrderStatistics")
-    public OrderStatistics getPersonalStatistics(String username, String begin, String end){
+    @RequestMapping("/user/getPersonalOrderStatistics")
+    public OrderStatistics getPersonalStatistics(HttpServletRequest request){
+        HttpSession session=request.getSession(true);
+        String username=(String)session.getAttribute("username");
+        String begin=request.getParameter("begin");
+        String end=request.getParameter("end");
         return eorderService.getPersonalStatistics(username, begin, end);
     }
 

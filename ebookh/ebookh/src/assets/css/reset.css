@@ -170,13 +170,16 @@ ul{
     font-size:20px;
     color:orange;
     font-family:   STCaiyun;
+    text-shadow: 0 0 10px 0;
 }
 
 .footer{
     width:100%;
     height:60px;
-    color:#000;
-    box-shadow:0 0 10px 0;
+    color:#aaa;
+    border-top-width: 1px;
+    border-top-color: #aaa;
+    border-top-style: double;
 }
 
 .footer p{

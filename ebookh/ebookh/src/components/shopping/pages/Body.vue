@@ -38,7 +38,7 @@ export default {
   },
   methods:{
       getOrderList:function(){
-        this.$http.get("http://localhost:8080/ebook/getPersonalCart").then((res)=>{
+        this.$http.get("http://localhost:8080/ebook/user/getPersonalCart").then((res)=>{
           console.log(res);
             this.orders=res.data;
         })

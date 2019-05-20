@@ -151,8 +151,8 @@ export default {
 
 .ebook{
     position:absolute;
-    top:0;
-    left:0;
+    top:20px;
+    left:20px;
     right:0;
     color:black;
     opacity:1;
