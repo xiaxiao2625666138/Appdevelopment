@@ -17,8 +17,8 @@ public class EorderDaoImpl implements EorderDao {
     private EorderRespository eorderRespository;
 
     @Override
-    public List<Eorder> findAll() {
-        return eorderRespository.findAll();
+    public List<Eorder> findAll(String paid) {
+        return eorderRespository.findByPaidOrderByTimeDesc(paid);
     }
 
     @Override

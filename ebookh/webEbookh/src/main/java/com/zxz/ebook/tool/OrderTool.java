@@ -22,7 +22,7 @@ public class OrderTool {
         order.eorders.add(eorder);
         for(int i=1;i<size;i++){
             eorder=eorders.get(i);
-            if(eorder.getTime().equals(order.time)){
+            if(eorder.getTime().equals(order.time) && eorder.getUsername().equals(order.username)){
                 order.money=order.money+eorder.getBook().getPrice()*eorder.getBook_num();
                 order.booknum=order.booknum+eorder.getBook_num();
                 order.eorders.add(eorder);

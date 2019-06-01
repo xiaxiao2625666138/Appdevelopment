@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -33,9 +32,11 @@ public class EorderServiceImpl implements EorderService {
     @Autowired
     private JpaRepository<Book, Integer> bookJpaRepository;
 
+
     @Override
-    public List<Eorder> lookAllEorder() {
-        return eorderDao.findAll();
+    public List<Order> lookAllOrder() {
+        List<Eorder> eorders=eorderDao.findAll("Y");
+        return OrderTool.getOrders(eorders);
     }
 
     @Override

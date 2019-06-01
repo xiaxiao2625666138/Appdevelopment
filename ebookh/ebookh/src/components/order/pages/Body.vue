@@ -2,15 +2,17 @@
   <div class="body">
    <div class="ebook">order</div>
    <div class="filter" >
+     <input type="text" placeholder="username" v-model="onlyUser"/>
      <input type="text" placeholder="2000-01-01 12:00:00" v-model="time1"/>
      <input type="text" placeholder="2020-01-01 12:00:00" v-model="time2"/>
-     <button @click="orderStatistics">统计</button>
+     <button v-if="!adm" @click="orderStatistics">统计</button>
    </div>
    <div class="content" v-if="!statistics">
      <div v-for="order in orders"
          v-if="(order.time>=time1 && order.time<=time2) 
          || (order.time<=time2 && time1=='') 
-         || (order.time>=time1 &&time2=='')" 
+         || (order.time>=time1 &&time2=='') 
+         && (onlyUser=='' || (onlyUser!='' && order.username==onlyUser))" 
          class="order" >
           <p class="order-id">{{order.username}} | {{order.time}}</p>
           <div v-for="eorder in order.eorders"
@@ -75,17 +77,21 @@ export default {
       orderSta:{},
       statistics:false,
       server:this.GLOBAL.server,
+      adm:false,
+      onlyUser:"",
     }
   },
   methods:{
+      getAllOrderList:function(){
+        this.$http.get(this.server+"/adm/lookAllOrder").then((res)=>{
+            console.log(res);
+            this.orders=res.data;
+        })
+      },
       getOrderList:function(){
         this.$http.get(this.server+"/user/getPersonalOrder").then((res)=>{
           console.log(res);
-          if(res.data==302){
-            this.$router.push({path:"/"});
-          }else{
             this.orders=res.data;
-          }
         })
       },
       orderStatistics:function(){
@@ -102,7 +108,18 @@ export default {
       }
   },
   mounted(){
-        this.getOrderList();
+    this.$http.get(this.server+"/userType").then((res)=>{
+      console.log(res);
+        this.adm=res.data==2;
+        if(res.data==0){
+          this.$router.push({path:"/"});
+        }
+        if(this.adm){
+          this.getAllOrderList();
+        }else{
+          this.getOrderList();
+        }
+    })
   },
 }
 </script>
