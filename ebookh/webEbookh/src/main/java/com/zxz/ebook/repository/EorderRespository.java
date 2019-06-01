@@ -26,4 +26,6 @@ public interface EorderRespository extends JpaRepository<Eorder, Integer> {
     void deleteByUsernameAndPaidAndChosen(String username, String paid, String chosen);
 
     List<Eorder> findByUsernameAndPaidAndChosen(String username, String paid, String chosen);
+
+    List<Eorder> findByPaidOrderByTimeDesc(String paid);
 }

@@ -131,8 +131,7 @@ export default {
           if(res.data==0){
               this.$router.push({path: '/'});
           }else{
-              this.user=res.data.user;
-              this.adm=res.data.islogin==2;
+              this.adm=res.data==2;
           }
        });
         this.$http.get(this.server+"/lookAllBook").then((res)=>{
@@ -152,7 +151,7 @@ export default {
     overflow:hidden;
     z-index: 100;
     border-radius: 10px;
-    box-shadow:0 0 50px 0;
+    box-shadow:0 0 5px 0;
 }
 
 .classify{
@@ -294,7 +293,6 @@ button:active{
 }
 
 .manage{
-    margin-top:10px;
     text-align:right;
 }
 .manage button{

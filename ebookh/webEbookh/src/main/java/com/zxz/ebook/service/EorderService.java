@@ -1,12 +1,13 @@
 package com.zxz.ebook.service;
 
+import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.List;
 
 public interface EorderService {
-    public List<Eorder> lookAllEorder();
+    public List<Order> lookAllOrder();
     public List<Eorder> lookPersonalEorder(String username, String begin, String end);
     public OrderStatistics getPersonalStatistics(String username, String begin, String end);
     public String addEorder(int book_id, String username);
