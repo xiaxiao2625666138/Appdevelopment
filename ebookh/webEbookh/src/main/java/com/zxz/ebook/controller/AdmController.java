@@ -41,4 +41,8 @@ public class AdmController {
         return euserService.disableUser(username);
     }
 
+    @GetMapping(value="/adm/lookAllOrder")
+    public List<Order> lookAllEorder(){
+        return eorderService.lookAllOrder();
+    }
 }

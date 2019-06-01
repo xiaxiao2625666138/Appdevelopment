@@ -5,7 +5,7 @@ import com.zxz.ebook.entity.Eorder;
 import java.util.List;
 
 public interface EorderDao {
-    public List<Eorder> findAll();
+    public List<Eorder> findAll(String paid);
     public List<Eorder> findPersonalEorder(String username, String begin, String end);
     public void addEorder(int book_id, String user_name, String time);
     public Eorder getOne(String username, int bookid, String paid);
