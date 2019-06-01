@@ -7,14 +7,14 @@
                 <div class="user" v-for="user in users">
                     <div class="user-message">
                     <span class="iconfont icon">&#xe621;</span>
-                    <span class="username">{{user.username}}</span>
+                    <span class="username">{{user.name}}</span>
                     <span class="phone">{{user.phone}}</span>
                     <span class="address">{{user.address}}</span>
                     <span class="email">{{user.email}}</span>
                     </div>
                     <button type="button" class="disabled" 
                             :class="{on: user.disabled=='N', off: user.disabled=='Y'}"
-                            @click="disableUser(user.username)">
+                            @click="disableUser(user.name)">
                         <span  v-if="user.disabled=='N'">on</span>
                         <span  v-if="user.disabled=='Y'">off</span>
                     </button>
@@ -28,13 +28,14 @@
 export default {
   data: function() {
     return {
-      users: []
+      users: [],
+      server:this.GLOBAL.server,
     };
   },
   components: {},
   methods: {
       getAllUser:function(){
-           this.$http.get("/api/page/adm/AllUserServlet").then(res => {
+           this.$http.get(this.server+"/adm/lookAllEuser").then(res => {
            console.log(res);
            if (res.data == 302) {
               this.$router.push({ path: "/" });
@@ -44,10 +45,10 @@ export default {
        });
       },
       disableUser:function(uname){
-          var getUrl="/api/page/adm/DisableUserServlet?username="+uname;
+          var getUrl=this.server+"/adm/disableEuser?username="+uname;
           this.$http.get(getUrl).then(res => {
           console.log(res);
-          if (res.data == 302) {
+          if (res.data == 0) {
           this.$router.push({ path: "/" });
           } else if(res.data==0){
               alert("Cannot Disable Administrator!");
@@ -77,6 +78,7 @@ export default {
     overflow:hidden;
     position: relative;
     border-radius:30px;
+
 }
 
 img{
@@ -98,6 +100,7 @@ img:hover{
 }
 
 .users{
+    color:#aaa;
     height:1000px;
     width:1000px;
     margin:80px 0;

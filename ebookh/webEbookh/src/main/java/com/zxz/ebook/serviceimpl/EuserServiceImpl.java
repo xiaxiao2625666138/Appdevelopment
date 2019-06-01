@@ -7,12 +7,14 @@ import com.zxz.ebook.entity.Euser;
 import com.zxz.ebook.service.EuserService;
 import com.zxz.ebook.tool.OrderTool;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -21,11 +23,9 @@ public class EuserServiceImpl implements EuserService {
     @Autowired
     private EuserDao euserDao;
 
+    @Autowired
+    private JpaRepository<Euser, String > euserJpaRepository;
     /*
-    @Override
-    public List<Euser> lookAllEuser() {
-        return euserDao.findAll();
-    }
 
     @Override
     public Euser getOneEuser(String username) {
@@ -34,12 +34,20 @@ public class EuserServiceImpl implements EuserService {
     */
 
     @Override
+    public List<Euser> lookAllEuser() {
+        return euserDao.findAll();
+    }
+
+    @Override
     public String loginEuser(HttpServletRequest request, HttpServletResponse response) {
         String username=request.getParameter("username");
         String password=request.getParameter("password");
         HttpSession session = ((HttpServletRequest)request).getSession(true);
         try{
             Euser euser=euserDao.getOne(username);
+            if(euser.getDisabled()=='Y'){
+                return "User Is Disabled!";
+            }
             if(euser.getPassword().equals(password)){
                 session.setAttribute("username", username);
                 if(euser.getName().equals("administrator"))
@@ -98,6 +106,7 @@ public class EuserServiceImpl implements EuserService {
         return (int)session.getAttribute("islogin");
     }
 
+
     @Override
     public List<Order> getOrders(String username) {
         List<Eorder> eorders=this.getPersonalEorder(username, "Y");
@@ -107,5 +116,22 @@ public class EuserServiceImpl implements EuserService {
     @Override
     public List<Eorder> getCart(String username) {
         return this.getPersonalEorder(username, "N");
+    }
+
+
+    @Override
+    @Transactional
+    public int disableUser(String username) {
+        try{
+            Euser euser=euserDao.getOne(username);
+            char disabled;
+            if(euser.getDisabled()=='Y')disabled='N';
+            else disabled='Y';
+            euser.setDisabled(disabled);
+            euserJpaRepository.saveAndFlush(euser);
+            return 1;
+        }catch(Exception err){
+            return 0;
+        }
     }
 }

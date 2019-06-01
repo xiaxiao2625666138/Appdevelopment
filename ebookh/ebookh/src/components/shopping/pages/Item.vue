@@ -26,6 +26,7 @@ export default {
   data(){
     return {
       num:this.order.book_num,
+      server:this.GLOBAL.server,
     }
   },
   methods:{
@@ -38,14 +39,14 @@ export default {
         this.order.chosen='Y';
         ch="Y";
       }
-      var getUrl="http://localhost:8080/ebook/user/choseEorder?orderid="+this.order.id
+      var getUrl=this.server+"/user/choseEorder?orderid="+this.order.id
       +"&chosen="+ch;
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           this.chosen=!this.chosen;});
     },
     addBook:function(m){
-      var getUrl="http://localhost:8080/ebook/user/addBookNumber?orderid="+this.order.id
+      var getUrl=this.server+"/user/addBookNumber?orderid="+this.order.id
       +"&add="+m;
           this.$http.get(getUrl).then((res)=>{
           console.log(res);

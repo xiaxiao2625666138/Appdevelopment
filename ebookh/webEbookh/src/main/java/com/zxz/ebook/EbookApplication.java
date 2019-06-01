@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-@ServletComponentScan(basePackages= {"com.zxz.ebook.filter"})
+@ServletComponentScan(basePackages= {"com.zxz.ebook.filter" })
 public class EbookApplication {
 
     public static void main(String[] args) {

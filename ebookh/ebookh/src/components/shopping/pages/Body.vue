@@ -29,45 +29,46 @@
 import ShoppingItem from "./Item"
 export default {
   components:{
-    ShoppingItem
+    ShoppingItem,
   },
   data(){
     return {
       orders:[],
+      server:this.GLOBAL.server,
     }
   },
   methods:{
       getOrderList:function(){
-        this.$http.get("http://localhost:8080/ebook/user/getPersonalCart").then((res)=>{
+        this.$http.get(this.server+"/user/getPersonalCart").then((res)=>{
           console.log(res);
             this.orders=res.data;
         })
       },
       chooseAll:function(){
-          this.$refs.item.forEach((it, index)=>{
-            it.chosen=true;
+          this.orders.forEach((it, index)=>{
+            it.chosen="Y";
           });
-          var getUrl="http://localhost:8080/ebook/user/choseAllEorder?chosen=Y";
+          var getUrl=this.server+"/user/choseAllEorder?chosen=Y";
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
       },
       chooseZero:function(){
-          this.$refs.item.forEach((it, index)=>{
-            it.chosen=false;
+          this.orders.forEach((it, index)=>{
+            it.chosen="N";
           });
-          var getUrl="http://localhost:8080/ebook/user/choseAllEorder?chosen=N";
+          var getUrl=this.server+"/user/choseAllEorder?chosen=N";
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
       },
       deleteOrder:function(){
-        var getUrl="http://localhost:8080/ebook/user/deleteEorder";
+        var getUrl=this.server+"/user/deleteEorder";
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           this.getOrderList();
           });
       },
       payOrder:function(){
-        var getUrl="http://localhost:8080/ebook/user/payOrder";
+        var getUrl=this.server+"/user/payOrder";
           this.$http.get(getUrl).then((res)=>{
           console.log(res);
           alert("支付 ￥"+res.data+"!");

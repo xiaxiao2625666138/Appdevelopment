@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import Home from '@/components/home/Home'
 import Books from '@/components/books/Books'
-import Details from '@/components/details/Details'
 import Shopping from '@/components/shopping/Shopping'
 import Daijian from '@/components/daijian/Daijian'
 import Setting from '@/components/setting/setting'
@@ -20,19 +18,9 @@ export default new Router({
       component: Login 
     },
     {
-      path: '/home',
-      name: 'Home',
-      component: Home 
-    },
-    {
       path: '/books',
       name:'Books',
       component:Books
-    },
-    {
-      path:'/details',
-      name:'Details',
-      component:Details
     },
     {
       path:'/shopping',

@@ -10,7 +10,7 @@ import java.util.List;
 public class Order {
     public String username;
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
-    public Timestamp time;
+    public String time;
     public float money;
     public int booknum;
     public List<Eorder> eorders=new ArrayList<Eorder>();

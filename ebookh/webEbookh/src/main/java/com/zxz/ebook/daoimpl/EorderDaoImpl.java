@@ -1,8 +1,8 @@
 package com.zxz.ebook.daoimpl;
 
+import com.zxz.ebook.repository.EorderRespository;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Eorder;
-import com.zxz.ebook.repository.EorderRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,13 +22,13 @@ public class EorderDaoImpl implements EorderDao {
     }
 
     @Override
-    public List<Eorder> findPersonalEorder(String username, Timestamp begin, Timestamp end) {
+    public List<Eorder> findPersonalEorder(String username, String begin, String end) {
         return eorderRespository.findByUsernameAndTimeBetweenAndPaidIsOrderByTimeDesc(username, begin, end, "Y");
     }
 
     @Override
     @Transactional
-    public void addEorder(int book_id, String user_name, Timestamp time) {
+    public void addEorder(int book_id, String user_name, String time) {
         eorderRespository.insertEorder(book_id, user_name, time);
     }
 

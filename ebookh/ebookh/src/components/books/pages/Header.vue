@@ -9,7 +9,7 @@
       <router-link v-if="adm" to="./userManage">
         <p :class="{now: now=='userManage'}">用户管理</p>
       </router-link>
-      <router-link to="./daijian">
+      <router-link v-if="!adm && 0" to="./daijian" >
         <p title="暂时还没有推荐功能">求推荐</p>
       </router-link>
       <router-link v-if="!adm" to="./order">
@@ -30,14 +30,14 @@ export default {
   data:function(){
     return{
         user:"",
-        adm: false
+        adm: false,
+        server:this.GLOBAL.server,
     }
   },
 
   mounted(){
-    this.$http.get("http://localhost:8080/ebook/userType").then((res)=>{
-        this.user=res.data.user;
-        this.adm=res.data.islogin==2;
+    this.$http.get(this.server+"/userType").then((res)=>{
+        this.adm=res.data==2;
     })
   }
 }

@@ -2,7 +2,7 @@
   <div class="bg">
     <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
-    <span class="ebook">ebook</span>
+    <span class="ebook">Book Store</span>
     <div class="fun">
         <div class="buttons">
         <router-link to="./books">
@@ -31,12 +31,13 @@ export default {
   data:function(){
     return{
         user:"",
-        adm: false
+        adm: false,
+        server:this.GLOBAL.server,
     }
   },
   methods:{ 
     logout:function(){
-      var getUrl="http://localhost:8080/ebook/logout";
+      var getUrl=this.server+"/logout";
       this.$http.get(getUrl).then((res)=>{
          console.log(res);
       })
@@ -44,7 +45,7 @@ export default {
     },
   },
   mounted(){
-    this.$http.get("http://localhost:8080/ebook/userType").then((res)=>{
+    this.$http.get(this.server+"/userType").then((res)=>{
           console.log(res);
           if(res.data==0){
               this.$router.push({path: '/'});

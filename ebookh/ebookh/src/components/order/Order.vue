@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <router-link to="./guide" class="ebook">
-        <p >ebook</p>
+        <p>Book Store</p>
     </router-link>
    <order-header :now="page"></order-header>
    <order-body></order-body>

@@ -1,8 +1,8 @@
 package com.zxz.ebook.daoimpl;
 
-import com.zxz.ebook.dao.WriterDao;
 import com.zxz.ebook.entity.Writer;
 import com.zxz.ebook.repository.WriterRespository;
+import com.zxz.ebook.dao.WriterDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

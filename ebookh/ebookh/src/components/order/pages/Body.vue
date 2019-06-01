@@ -73,12 +73,13 @@ export default {
       time1:"",
       time2:"",
       orderSta:{},
-      statistics:false
+      statistics:false,
+      server:this.GLOBAL.server,
     }
   },
   methods:{
       getOrderList:function(){
-        this.$http.get("http://localhost:8080/ebook/user/getPersonalOrder").then((res)=>{
+        this.$http.get(this.server+"/user/getPersonalOrder").then((res)=>{
           console.log(res);
           if(res.data==302){
             this.$router.push({path:"/"});
@@ -88,7 +89,7 @@ export default {
         })
       },
       orderStatistics:function(){
-        var getUrl="http://localhost:8080/ebook/user/getPersonalOrderStatistics?begin="
+        var getUrl=this.server+"/user/getPersonalOrderStatistics?begin="
         +this.time1+"&end="+this.time2;
         this.$http.get(getUrl).then((res)=>{
           console.log(res);

@@ -1,5 +1,7 @@
 package com.zxz.ebook.filter;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;

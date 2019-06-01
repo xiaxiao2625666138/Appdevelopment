@@ -1,14 +1,13 @@
 package com.zxz.ebook.daoimpl;
 
+import com.zxz.ebook.repository.EuserRespository;
 import com.zxz.ebook.dao.EuserDao;
 import com.zxz.ebook.entity.Euser;
-import com.zxz.ebook.repository.EuserRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class EuserDaoImpl implements EuserDao {
@@ -24,11 +23,6 @@ public class EuserDaoImpl implements EuserDao {
     @Override
     public Euser getOne(String username) {
         return euserRepository.getOne(username);
-    }
-
-    @Override
-    public Euser  save(Euser euser) {
-        return euserRepository.save(euser);
     }
 
     @Override

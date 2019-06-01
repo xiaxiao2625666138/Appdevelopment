@@ -6,7 +6,6 @@ import com.zxz.ebook.dao.BookDao;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Eorder;
-import com.zxz.ebook.repository.EorderRespository;
 import com.zxz.ebook.service.EorderService;
 import com.zxz.ebook.tool.OrderTool;
 import com.zxz.ebook.tool.TimeTool;
@@ -17,11 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 @Service
 public class EorderServiceImpl implements EorderService {
@@ -45,17 +40,17 @@ public class EorderServiceImpl implements EorderService {
 
     @Override
     public List<Eorder> lookPersonalEorder(String username, String begin, String end) {
-        return eorderDao.findPersonalEorder(username, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+        return eorderDao.findPersonalEorder(username, begin, end);
     }
 
     @Override
     public OrderStatistics getPersonalStatistics(String username, String begin, String end) {
-        List<Eorder> eorders=eorderDao.findPersonalEorder(username, Timestamp.valueOf(begin), Timestamp.valueOf(end));
+        List<Eorder> eorders=eorderDao.findPersonalEorder(username, begin, end);
         List<Order> orders= OrderTool.getOrders(eorders);
         OrderStatistics orderStatistics=OrderTool.getPersoanlOrderStatistics(orders);
         orderStatistics.username=username;
-        orderStatistics.begin=Timestamp.valueOf(begin);
-        orderStatistics.end=Timestamp.valueOf(end);
+        orderStatistics.begin=begin;
+        orderStatistics.end=end;
         return orderStatistics;
     }
 
@@ -70,16 +65,16 @@ public class EorderServiceImpl implements EorderService {
         try{
             Eorder eorder=eorderDao.getOne(username, book_id, "N");
             if(eorder==null){
-                eorderDao.addEorder(book_id, username, TimeTool.now());
+                eorderDao.addEorder(book_id, username, TimeTool.now().toString());
                 return "Add To Cart";
             }
             if(eorder.getBook().getInventory()>eorder.getBook_num()){
                 eorder.setBook_num(eorder.getBook_num()+1);
-                eorder.setTime(TimeTool.now());
+                eorder.setTime(TimeTool.now().toString());
                 jpaRepository.saveAndFlush(eorder);
             }
         }catch(EntityNotFoundException err){
-            eorderDao.addEorder(book_id, username, TimeTool.now());
+            eorderDao.addEorder(book_id, username, TimeTool.now().toString());
         }catch(Exception err){
             err.printStackTrace();
             return "System Error!";
@@ -148,7 +143,7 @@ public class EorderServiceImpl implements EorderService {
     @Transactional
     public float payOrder(String username) {
         List<Eorder> eorders=eorderDao.getPersonalEorderByPaidAndChosen(username, "N", "Y");
-        Timestamp time=TimeTool.now();
+        String time=TimeTool.now().toString();
         float money=0;
         for(int i=0;i<eorders.size();i++){
             Eorder eorder=eorders.get(i);

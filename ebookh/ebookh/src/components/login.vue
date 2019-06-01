@@ -2,7 +2,7 @@
   <div class="bg">
     <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
-    <span class="ebook">ebook</span>
+    <span class="ebook">Book Store</span>
   <div id='login-register' class="login-register" :style="LRH">
     <p class="title iconfont">&#xe621;</p>
     <div class="choose" >
@@ -50,6 +50,7 @@
 export default {
   data:function(){
     return{
+      server:this.GLOBAL.server,
       message:"",
       loginStyle:{
          "border-bottom-color": "hsl(182, 96%, 50%)"
@@ -103,9 +104,8 @@ export default {
       this.LRH.height="600px";
     },
     loginRegister:function(){
-
       if(this.fun==0){
-        var getUrl="http://localhost:8080/ebook/login?username="+this.lname+"&password="+this.lpass;
+        var getUrl=this.server+"/login?username="+this.lname+"&password="+this.lpass;
         this.$http.post(getUrl).then((res)=>{
           console.log(res);
               this.message=res.data;
@@ -115,7 +115,7 @@ export default {
               }
         })
       }else{
-        var getUrl="http://localhost:8080/ebook/register?username="+this.rname+"&email="+this.remail+"&password="
+        var getUrl=this.server+"/register?username="+this.rname+"&email="+this.remail+"&password="
         +this.rpass+"&confirmPassword="+this.rcpass;
         this.$http.post(getUrl).then((res)=>{
           console.log(res);

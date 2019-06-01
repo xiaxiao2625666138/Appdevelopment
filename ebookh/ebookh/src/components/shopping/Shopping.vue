@@ -2,7 +2,7 @@
     
   <div class="shopping page">
     <router-link to="./guide" class="ebook">
-        <p >ebook</p>
+        <p>Book Store</p>
     </router-link>
     <shopping-header :now="page"></shopping-header>
     <shopping-body></shopping-body>

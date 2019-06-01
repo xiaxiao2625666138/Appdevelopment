@@ -1,9 +1,6 @@
 package com.zxz.ebook.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -23,7 +20,7 @@ public class Eorder {
     private Book book;
     private int book_num;
     private String paid;
-    private Timestamp time;
+    private String time;
     private String chosen;
 
     public Eorder(){}
@@ -78,10 +75,10 @@ public class Eorder {
     @Basic
     @Column(name="time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public Timestamp getTime() {
+    public String getTime() {
         return time;
     }
-    public void setTime(Timestamp time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

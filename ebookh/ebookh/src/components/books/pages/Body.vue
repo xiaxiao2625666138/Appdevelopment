@@ -75,16 +75,17 @@ export default {
             detailBook:{},
             lookDetail:false,
             user:"",
-            adm:false
+            adm:false,
+            server:this.GLOBAL.server,
         }
     },
     methods:{
         bookBrowse:function(){
-            var getURL="http://localhost:8080/ebook/";
+            var getURL=this.server;
             if(this.filter=="bookname"){
-                getURL=getURL+"lookBookLike?bookname="+this.condition;
+                getURL=getURL+"/lookBookLike?bookname="+this.condition;
             }else{
-                getURL=getURL+"lookBookBy?authorName="+this.condition;
+                getURL=getURL+"/lookBookBy?authorName="+this.condition;
             }
             this.$http.get(getURL).then((res)=>{
             console.log(res);
@@ -92,7 +93,7 @@ export default {
             })
         },
         addOrder:function(book_id){
-          var getUrl="http://localhost:8080/ebook/user/addEorder?bookid="+book_id;
+          var getUrl=this.server+"/user/addEorder?bookid="+book_id;
           this.$http.get(getUrl).then((res)=>{
           console.log(res)});
         },
@@ -108,7 +109,7 @@ export default {
             this.bookBrowse();
         },
         detail:function(id){
-            this.$http.get("http://localhost:8080/ebook/lookBookById?id="+id).then((res)=>{
+            this.$http.get(this.server+"/lookBookById?id="+id).then((res)=>{
             this.detailBook=res.data;
             this.lookDetail=true;
             })
@@ -125,7 +126,7 @@ export default {
         }
     },
     mounted(){
-      this.$http.get("http://localhost:8080/ebook/userType").then((res)=>{
+      this.$http.get(this.server+"/userType").then((res)=>{
           console.log(res);
           if(res.data==0){
               this.$router.push({path: '/'});
@@ -134,7 +135,7 @@ export default {
               this.adm=res.data.islogin==2;
           }
        });
-        this.$http.get("http://localhost:8080/ebook/lookAllBook").then((res)=>{
+        this.$http.get(this.server+"/lookAllBook").then((res)=>{
           console.log(res);
           this.books=res.data;
       });

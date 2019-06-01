@@ -9,11 +9,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public interface EorderRespository extends JpaRepository<Eorder, Integer> {
-    List<Eorder> findByUsernameAndTimeBetweenAndPaidIsOrderByTimeDesc(String username, Timestamp begin, Timestamp end, String paid);
+    List<Eorder> findByUsernameAndTimeBetweenAndPaidIsOrderByTimeDesc(String username, String begin, String end, String paid);
 
     @Modifying
     @Query(value="insert eorder(book_id, user_name, time) values(?1, ?2, ?3)", nativeQuery = true)
-    void insertEorder(int book_id, String user_name, Timestamp time);
+    void insertEorder(int book_id, String user_name, String time);
 
     Eorder getByUsernameAndBookIdAndPaid(String username, int bookid, String paid);
 

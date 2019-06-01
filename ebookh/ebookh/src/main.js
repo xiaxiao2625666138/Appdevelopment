@@ -3,8 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import globalVariable from '@/api/global_variable.js'
 
 Vue.config.productionTip = false
+
+Vue.prototype.GLOBAL=globalVariable
 
 //css
 import './assets/css/reset.css'
