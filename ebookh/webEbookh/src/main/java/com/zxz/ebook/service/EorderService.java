@@ -1,7 +1,9 @@
 package com.zxz.ebook.service;
 
+import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.List;
@@ -16,4 +18,6 @@ public interface EorderService {
     public String choseAllEorder(String username, String chosen);
     public String deleteEorderFromCart(String username);
     public float payOrder(String username);
+    public List<UserConsume> userConsume(String begin , String end);
+    public List<BookSaled> bookSaled(String begin, String end);
 }

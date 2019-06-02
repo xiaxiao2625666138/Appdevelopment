@@ -1,7 +1,9 @@
 package com.zxz.ebook.tool;
 
+import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.ArrayList;
@@ -55,5 +57,13 @@ public class OrderTool {
         orderStatistics.orders.addAll(orders);
         orderStatistics.totalTime=orderStatistics.orders.size();
         return orderStatistics;
+    }
+
+    static public List<UserConsume> userConsume(List<Object> list){
+        return null;
+    }
+
+    static public List<BookSaled> bookSaled(List<Object> list){
+        return null;
     }
 }

@@ -2,7 +2,7 @@
   <div class="body">
    <div class="ebook">order</div>
    <div class="filter" >
-     <input type="text" placeholder="username" v-model="onlyUser"/>
+     <input v-if="adm" type="text" placeholder="username" v-model="onlyUser"/>
      <input type="text" placeholder="2000-01-01 12:00:00" v-model="time1"/>
      <input type="text" placeholder="2020-01-01 12:00:00" v-model="time2"/>
      <button v-if="!adm" @click="orderStatistics">统计</button>
