@@ -1,5 +1,7 @@
 package com.zxz.ebook.dao;
 
+import com.zxz.ebook.Business.BookSaled;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.List;
@@ -14,4 +16,6 @@ public interface EorderDao {
     public List<Eorder> getPersonalEorderByPaid(String username, String paid);
     public void deleteEorderByUsername(String username, String paid, String chosen);
     public List<Eorder> getPersonalEorderByPaidAndChosen(String useranme, String paid, String chosen);
+    List<UserConsume> userConsume(String begin , String end);
+    List<BookSaled> bookSaled(String begin, String end);
 }
