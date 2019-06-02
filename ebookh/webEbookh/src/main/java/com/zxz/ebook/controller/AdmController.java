@@ -1,7 +1,9 @@
 package com.zxz.ebook.controller;
 
+import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Eorder;
 import com.zxz.ebook.entity.Euser;
@@ -44,5 +46,17 @@ public class AdmController {
     @GetMapping(value="/adm/lookAllOrder")
     public List<Order> lookAllEorder(){
         return eorderService.lookAllOrder();
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/adm/userConsume")
+    public List<UserConsume> userConsume(String begin , String end){
+        return eorderService.userConsume(begin, end);
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/adm/bookSaled")
+    public List<BookSaled> bookSaled(String begin , String end){
+        return eorderService.bookSaled(begin,end);
     }
 }

@@ -1,7 +1,9 @@
 package com.zxz.ebook.serviceimpl;
 
+import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.dao.BookDao;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Book;
@@ -154,11 +156,22 @@ public class EorderServiceImpl implements EorderService {
             money+=eorder.getBook_num()*eorder.getBook().getPrice();
             Book book=eorder.getBook();
             book.setInventory(book.getInventory()-eorder.getBook_num());
+            book.setSaled(book.getSaled()+eorder.getBook_num());
             bookJpaRepository.saveAndFlush(book);
         }
         jpaRepository.saveAll(eorders);
         jpaRepository.flush();
         return money;
+    }
+
+    @Override
+    public List<UserConsume> userConsume(String begin , String end) {
+        return eorderDao.userConsume(begin, end);
+    }
+
+    @Override
+    public List<BookSaled> bookSaled(String begin, String end) {
+        return eorderDao.bookSaled(begin, end);
     }
 
 }

@@ -1,5 +1,7 @@
 package com.zxz.ebook.daoimpl;
 
+import com.zxz.ebook.Business.BookSaled;
+import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.repository.EorderRespository;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Eorder;
@@ -63,6 +65,16 @@ public class EorderDaoImpl implements EorderDao {
     @Override
     public List<Eorder> getPersonalEorderByPaidAndChosen(String username, String paid, String chosen) {
         return eorderRespository.findByUsernameAndPaidAndChosen(username, paid, chosen);
+    }
+
+    @Override
+    public List<UserConsume> userConsume(String begin , String end) {
+        return eorderRespository.userConsume(begin , end);
+    }
+
+    @Override
+    public List<BookSaled> bookSaled(String begin, String end) {
+        return eorderRespository.bookSaled(begin, end);
     }
 
 }
