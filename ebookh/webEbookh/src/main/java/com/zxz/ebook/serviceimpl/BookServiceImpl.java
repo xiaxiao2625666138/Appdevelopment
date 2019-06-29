@@ -1,5 +1,6 @@
 package com.zxz.ebook.serviceimpl;
 
+import com.zxz.ebook.dao.BookimageDao;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.service.BookService;
 import com.zxz.ebook.dao.BookDao;
@@ -14,9 +15,16 @@ public class BookServiceImpl implements BookService {
     @Autowired
     private BookDao bookDao;
 
+    @Autowired
+    private BookimageDao bookImageDao;
+
     @Override
     public List<Book> lookAllBook() {
-        return bookDao.findAll();
+        List<Book> books=bookDao.findAll();
+        for (Book book:books) {
+            book.setBookimage(bookImageDao.findByBookid(book.getId()).getImage());
+        }
+        return books;
     }
 
     @Override

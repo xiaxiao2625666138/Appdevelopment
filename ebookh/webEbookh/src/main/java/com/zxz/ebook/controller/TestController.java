@@ -4,10 +4,8 @@ import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Eorder;
-import com.zxz.ebook.service.BookService;
-import com.zxz.ebook.service.EorderService;
-import com.zxz.ebook.service.EuserService;
-import com.zxz.ebook.service.WriterService;
+import com.zxz.ebook.entity.Muser;
+import com.zxz.ebook.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +27,11 @@ public class TestController {
     @Autowired
     private WriterService writerService;
 
+    @Autowired
+    private MuserService muserService;
+
+    @Autowired
+    private BookimageService bookimageService;
     /*
     @RequestMapping("/hello")
     public String say(){
@@ -65,6 +68,21 @@ public class TestController {
         return eorderService.lookPersonalEorder(username, begin, end);
     }
     */
+
+    @RequestMapping(value="/lookAllMuser")
+    public List<Muser> lookAllMuser(){
+        return muserService.lookAllMuser();
+    }
+
+    @RequestMapping(value="lookMuser")
+    public Muser lookMuser(String username){
+        return muserService.lookMuser(username);
+    }
+
+    @RequestMapping(value="/adm/initImages")
+    public void initImages(){
+        bookimageService.initImages();
+    }
 
     @RequestMapping(value="/lookAllBook")
     public List<Book> lookAllBook(){
