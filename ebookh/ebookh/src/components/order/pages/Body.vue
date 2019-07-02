@@ -1,6 +1,12 @@
 <template>
 <div class="body">
  <div class="body-content">
+   <user-consume @close="close" :begin="time1" :end="time2" :userConsume="userConsume" v-if="userconsume"></user-consume>
+   <book-saled @close="close" :begin="time1" :end="time2" :bookSaled="bookSaled"  v-if="booksaled"></book-saled>
+   <div class="admfun">
+     <button @click="lookBookSaled" v-if="adm">销量统计</button>
+     <button  @click="lookUserConsume" v-if="adm">用户消费统计</button>
+   </div>
    <div class="filter" >
      <input v-if="adm" type="text" placeholder="username" v-model="onlyUser"/>
      <input type="text" placeholder="2000-01-01 12:00:00" v-model="time1"/>
@@ -68,21 +74,53 @@
 </div>
 </template>
 
+
+
 <script>
+
+import UserConsume from './UserConsume'
+import BookSaled from './BookSaled'
+
 export default {
+  components:{
+    UserConsume,
+    BookSaled,
+  },
   data(){
     return {
       orders:[],
-      time1:"",
-      time2:"",
+      time1:"2000-01-01 00:00:00",
+      time2:"2020-01-01 00:00:00",
       orderSta:{},
       statistics:false,
       server:this.GLOBAL.server,
       adm:false,
       onlyUser:"",
+      booksaled:false,
+      userconsume:false,
+      userConsume:{},
+      bookSaled:{},
     }
   },
   methods:{
+      lookUserConsume:function(){
+        var getUrl=this.server+"/adm/userConsume?begin="+this.time1+
+        "&end="+this.time2;
+        this.$http.get(getUrl).then((res)=>{
+          console.log(res.data);
+          this.userConsume=res.data;
+          this.userconsume=true;
+        })
+      },
+      lookBookSaled:function(){
+        var getUrl=this.server+"/adm/bookSaled?begin="+this.time1+
+        "&end="+this.time2;
+        this.$http.get(getUrl).then((res)=>{
+          console.log(res.data);
+          this.bookSaled=res.data;
+          this.booksaled=true;
+        })
+      },
       getAllOrderList:function(){
         this.$http.get(this.server+"/adm/lookAllOrder").then((res)=>{
             console.log(res);
@@ -106,6 +144,8 @@ export default {
       },
       close:function(){
         this.statistics=false;
+        this.userconsume=false;
+        this.booksaled=false;
       }
   },
   mounted(){
@@ -139,6 +179,17 @@ export default {
   background:rgb(239, 240, 234);
 }
 
+.admfun{
+  position:absolute;
+  top:20px;
+  width:520px;
+  left:100px;
+  z-index:400;
+}
+.admfun button{
+  margin-right:20px;
+}
+
 .filter{
   position:absolute;
   top:20px;
@@ -148,7 +199,6 @@ export default {
 }
 
 .filter input{
-  right:60px;
   width:150px;
   height:30px;
   border-radius:8px;
@@ -169,6 +219,7 @@ export default {
   background:rgb(12, 195, 250);
   box-shadow: 0 0 5px 0;
 }
+
 .filter button:hover{
   background:rgb(81, 140, 158);
 }
