@@ -1,7 +1,5 @@
 package com.zxz.ebook.dao;
 
-import com.zxz.ebook.Business.BookSaled;
-import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.List;

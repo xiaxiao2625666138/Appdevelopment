@@ -4,7 +4,6 @@ import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Eorder;
-import com.zxz.ebook.entity.Muser;
 import com.zxz.ebook.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,57 +27,7 @@ public class EbookController {
     private WriterService writerService;
 
     @Autowired
-    private MuserService muserService;
-
-    @Autowired
     private BookimageService bookimageService;
-    /*
-    @RequestMapping("/hello")
-    public String say(){
-        return "Hello SpringBoot!";
-    }
-
-    @RequestMapping(value="/lookAllBook")
-    public List<Book> lookAllBook(){
-        return bookService.lookAllBook();
-    }
-
-    @GetMapping(value="/lookAllEuser")
-    public List<Euser> lookAllEuser(){
-        return euserService.lookAllEuser();
-    }
-
-    @GetMapping(value="/lookAllEorder")
-    public List<Eorder> lookAllEorder(){
-        return eorderService.lookAllEorder();
-    }
-
-    @GetMapping(value="/lookAllWriter")
-    public List<Writer> lookAllWriter(){
-        return writerService.lookAllWriter();
-    }
-
-    @RequestMapping("/getOneEuser")
-    public Euser getOneEuser(String username){
-        return euserService.getOneEuser(username);
-    }
-
-    @RequestMapping("/lookPersonalEorder")
-    public List<Eorder> lookPersonalEorder(String username, String begin, String end){
-        return eorderService.lookPersonalEorder(username, begin, end);
-    }
-    */
-
-    @RequestMapping(value="/lookAllMuser")
-    public List<Muser> lookAllMuser(){
-        return muserService.lookAllMuser();
-    }
-
-    @RequestMapping(value="lookMuser")
-    public Muser lookMuser(String username){
-        return muserService.lookMuser(username);
-    }
-
     /*
     @RequestMapping(value="/adm/initImages")
     public void initImages(){

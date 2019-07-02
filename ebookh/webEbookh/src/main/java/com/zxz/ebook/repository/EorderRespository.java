@@ -1,7 +1,5 @@
 package com.zxz.ebook.repository;
 
-import com.zxz.ebook.Business.BookSaled;
-import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

@@ -1,9 +1,7 @@
 package com.zxz.ebook.service;
 
-import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
-import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.entity.Eorder;
 
 import java.util.List;

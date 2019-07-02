@@ -1,7 +1,5 @@
 package com.zxz.ebook.daoimpl;
 
-import com.zxz.ebook.Business.BookSaled;
-import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.repository.EorderRespository;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Eorder;
