@@ -16,7 +16,7 @@ public class Press {
     public Press(){}
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="press_id")
     public int getId() {
         return id;

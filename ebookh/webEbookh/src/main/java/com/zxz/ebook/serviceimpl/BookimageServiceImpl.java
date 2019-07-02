@@ -17,6 +17,20 @@ public class BookimageServiceImpl implements BookimageService {
     private BookimageDao bookimageDao;
 
     @Override
+    public void saveBookimage(int bookid, byte[] image) {
+        Bookimage bookimage=new Bookimage();
+        bookimage.setBookid(bookid);
+        bookimage.setImage(image);
+        bookimageDao.insertImage(bookimage);
+    }
+
+    @Override
+    public void deleteCover(int bookid) {
+        bookimageDao.deleteByBookid(bookid);
+    }
+
+    /*
+    @Override
     public void initImages(){
         String url="D:\\Appdevelopment\\ebookh\\webEbookh\\src\\main\\resources\\static\\img\\b";
         for(int i=1;i<45;i++){
@@ -27,4 +41,5 @@ public class BookimageServiceImpl implements BookimageService {
             bookimageDao.insertImage(bookimage);
         }
     }
+    */
 }

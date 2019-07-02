@@ -1,6 +1,6 @@
 <template>
-  <div class="body">
-   <div class="ebook">order</div>
+<div class="body">
+ <div class="body-content">
    <div class="filter" >
      <input v-if="adm" type="text" placeholder="username" v-model="onlyUser"/>
      <input type="text" placeholder="2000-01-01 12:00:00" v-model="time1"/>
@@ -9,15 +9,15 @@
    </div>
    <div class="content" v-if="!statistics">
      <div v-for="order in orders"
-         v-if="(order.time>=time1 && order.time<=time2) 
+         v-if="((order.time>=time1 && order.time<=time2) 
          || (order.time<=time2 && time1=='') 
-         || (order.time>=time1 &&time2=='') 
+         || (order.time>=time1 &&time2==''))
          && (onlyUser=='' || (onlyUser!='' && order.username==onlyUser))" 
          class="order" >
           <p class="order-id">{{order.username}} | {{order.time}}</p>
           <div v-for="eorder in order.eorders"
                class="book">
-            <img :src="eorder.book.cover"/>
+            <img :src="'data:image/jpg;base64, '+eorder.book.bookimage" />
             <div class="message">
               <p class="ISBN">ISBN: {{eorder.book.isbn}}</p>
               <p>
@@ -65,6 +65,7 @@
      <div class="tail"></div>
    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -126,32 +127,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.body{
-  margin-left:20%;
-  margin-top:100px;
-  box-shadow: 0 0 50px 0;
+
+.body-content{
+  margin-top:500px;
+  box-shadow: 0 0 5px 0;
   position:relative;
   width:890px;
   overflow:hidden;
-  margin-bottom:80px;
   border-radius: 10px;
-}
-.ebook{
-  left:30px;
-  width:30px;
-  color:cadetblue;
-  z-index:400;
-  left:0;
-  right:0;
-  margin:auto;
-  position:absolute;
-  text-shadow:0 0 10px 0;
+  margin: 0 auto;
+  background:rgb(239, 240, 234);
 }
 
 .filter{
   position:absolute;
-  top:110px;
-  right:50px;
+  top:20px;
+  width:520px;
+  right:40px;
   z-index:400;
 }
 
@@ -160,8 +152,8 @@ export default {
   width:150px;
   height:30px;
   border-radius:8px;
-  background:#fff;
-  box-shadow: 0 0 20px 0;
+  background:rgb(239, 240, 234);
+  box-shadow: 0 0 5px 0;
   margin-right:15px;
 }
 
@@ -175,7 +167,7 @@ export default {
   vertical-align: top;
   border-radius:8px;
   background:rgb(12, 195, 250);
-  box-shadow: 0 0 20px 0;
+  box-shadow: 0 0 5px 0;
 }
 .filter button:hover{
   background:rgb(81, 140, 158);

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WriterRespository extends JpaRepository<Writer, Integer> {
     public List<Writer> findByNameContaining(String name);
+    public Writer findByName(String name);
 }

@@ -17,7 +17,7 @@ import java.util.Set;
 
 @CrossOrigin(allowCredentials = "true")
 @RestController
-public class TestController {
+public class EbookController {
     @Autowired
     private BookService bookService;
     @Autowired
@@ -79,10 +79,12 @@ public class TestController {
         return muserService.lookMuser(username);
     }
 
+    /*
     @RequestMapping(value="/adm/initImages")
     public void initImages(){
         bookimageService.initImages();
     }
+    */
 
     @RequestMapping(value="/lookAllBook")
     public List<Book> lookAllBook(){

@@ -1,8 +1,10 @@
 <template>
   <div class="body">
     <div class="content">
+         <add-book v-if="addbook" @cancel="cancel" @update="bookBrowse"></add-book>
+         <alter-book v-if="alterbook" @cancel="cancel" @update="bookBrowse" :book="altering"></alter-book>
          <div class="select">
-             <button v-if="adm" class="add">+</button>
+             <button v-if="adm" class="add" @click="addBook">+</button>
              <button @click="setFilter('author')"
              :style="byauthor">Author</button>
              <button @click="setFilter('bookname')"
@@ -15,8 +17,9 @@
             <ul class="bl">
                <li v-for="item in books">
                    <div class="item">
-                      <img @mouseover="detail(item.id)" 
-                      @mouseout="closeDetail" :src="item.cover" />
+                       <img :src="'data:image/jpg;base64, '+item.bookimage"
+                       @mouseover="detail(item.id)" 
+                      @mouseout="closeDetail"/>
                       <div class="browse">
                           <p class="isbn">
                               ISBN: {{item.isbn}}
@@ -38,9 +41,8 @@
                               &#xe60c;
                           </button>
                           <div v-if="adm" class="manage">
-                              <button v-if="item.onsale=='N'" @click="offOnSale(item.book_id, 'Y', item)">add</button>
-                              <button v-if="item.onsale=='Y'" @click="offOnSale(item.book_id, 'N', item)">Delete</button>
-                              <button >Alter</button>
+                              <button @click="deleteBook(item.id)">Delete</button>
+                              <button @click="alterBook(item)">Alter</button>
                           </div>
                       </div>
                    </div>
@@ -54,11 +56,15 @@
 <script>
 
 import DetailBook from "./Detail";
+import AddBook from "./AddBook";
+import AlterBook from "./AlterBook";
 
 export default {
     props:[],
     components:{
         DetailBook,
+        AddBook,
+        AlterBook
     },
     data:function(){
         return{
@@ -74,12 +80,22 @@ export default {
             },
             detailBook:{},
             lookDetail:false,
+            addbook:false,
+            alterbook:false,
+            altering:{},
             user:"",
             adm:false,
             server:this.GLOBAL.server,
         }
     },
     methods:{
+        addBook:function(){
+            this.addbook=true;
+        },
+        cancel:function(){
+            this.addbook=false;
+            this.alterbook=false;
+        },
         bookBrowse:function(){
             var getURL=this.server;
             if(this.filter=="bookname"){
@@ -118,11 +134,16 @@ export default {
             this.lookDetail=false;
             this.Detailbook={};
         },
-        offOnSale:function(book_id, offon, item){
-            var getUrl="/api/page/adm/OffOnServlet?book_id="+book_id+"&offon="+offon;
-            this.$http.get(getUrl).then((res)=>{
-                item.onsale=offon;
-            });
+        deleteBook:function(id){
+            var url=this.server+"/adm/deleteBook?id="+id;
+            this.$http.get(url).then((res)=>{
+                alert(res.data);
+                this.bookBrowse();
+            })
+        },
+        alterBook:function(book){
+            this.altering=book;
+            this.alterbook=true;
         }
     },
     mounted(){
@@ -146,12 +167,14 @@ export default {
 <style scoped>
 .content{
     width:747px;
+    width:1122px;
     height:870px;
     position:relative;
     overflow:hidden;
     z-index: 100;
     border-radius: 10px;
     box-shadow:0 0 5px 0;
+    background:rgb(239, 240, 234);
 }
 
 .classify{
@@ -204,6 +227,7 @@ img{
 .book-list{
     clear:both;
     width:780px;
+    width:1150px;
     height:708px;
     overflow:hidden;
 }
@@ -213,6 +237,7 @@ img{
     overflow-y:auto;
     white-space:normal;
     width:780px;
+    width:1150px;
     height:710px;
     z-index:10000;
 }
@@ -238,6 +263,12 @@ button{
     position:relative;
     vertical-align:top;
     height:160px;
+}
+
+.browse .highlight{
+    position:absolute;
+    right:10px;
+
 }
 
 .browse p{

@@ -23,4 +23,9 @@ public class BookimageDaoImpl implements BookimageDao {
     public Bookimage findByBookid(int bookid) {
         return bookimageRepository.findByBookid(bookid);
     }
+
+    @Override
+    public Object deleteByBookid(int bookid) {
+        return bookimageRepository.deleteByBookid(bookid);
+    }
 }

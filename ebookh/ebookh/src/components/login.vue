@@ -2,7 +2,7 @@
   <div class="bg">
     <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
-    <span class="ebook">Book Store</span>
+    <span class="book-store">Book Store</span>
   <div id='login-register' class="login-register" :style="LRH">
     <p class="title iconfont">&#xe621;</p>
     <div class="choose" >
@@ -129,6 +129,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.book-store{
+    position:absolute;
+    top:10px;
+    left:10px;
+    z-index:10000;
+    cursor:pointer;
+    display:block;
+    font-size:36px;
+    font-family:STHupo;
+    line-height:40px;
+    color:rgba(0, 0, 0, 0.89);
+}
 .bg{
     width:100vw;
     height:100vh;

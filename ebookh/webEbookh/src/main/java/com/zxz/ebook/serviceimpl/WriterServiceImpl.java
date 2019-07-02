@@ -1,5 +1,6 @@
 package com.zxz.ebook.serviceimpl;
 
+import com.zxz.ebook.dao.BookimageDao;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Writer;
 import com.zxz.ebook.service.WriterService;
@@ -17,6 +18,9 @@ public class WriterServiceImpl implements WriterService {
     @Autowired
     private WriterDao writerDao;
 
+    @Autowired
+    private BookimageDao bookimageDao;
+
     @Override
     public List<Writer> lookAllWriter() {
         return writerDao.findAll();
@@ -28,6 +32,9 @@ public class WriterServiceImpl implements WriterService {
         Set<Book> books=new HashSet<Book>();
         for(int i=0;i<writers.size();i++){
             books.addAll(writers.get(i).getBooks());
+        }
+        for(Book book:books){
+            book.setBookimage(bookimageDao.findByBookid(book.getId()).getImage());
         }
         return books;
     }

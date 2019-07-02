@@ -1,6 +1,6 @@
 <template>
     <div class="this-book block">
-        <img :src="book.cover" />
+        <img :src="'data:image/jpg;base64,'+book.bookimage" />
         <div class="book-message">
             <p class="highlight score"> {{book.score}} </p>
             <p class="isbn">ISBN: {{book.isbn}}</p>
@@ -39,12 +39,10 @@
 export default {
   props: ["book"],
   data() {
-    return {};
+    return {
+    };
   },
   methods: {},
-  mounted(){
-      console.log(this.book)
-  }
 }
 </script>
 
@@ -62,7 +60,7 @@ img {
 .this-book {
   position: absolute;
   background:#fff;
-  z-index: 10000;
+  z-index: 1000;
   left:0;
   right:0;
   top:0;

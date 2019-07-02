@@ -30,4 +30,14 @@ public class BookDaoImpl implements BookDao {
     public Book findById(int id) {
         return bookRespository.getOne(id);
     }
+
+    @Override
+    public Book saveAndFlush(Book book) {
+        return bookRespository.saveAndFlush(book);
+    }
+
+    @Override
+    public Book deleteById(int id) {
+        return bookRespository.deleteById(id);
+    }
 }

@@ -2,9 +2,9 @@
   <div class="bg">
     <img src="@/assets/img/b.jpg" style="width:100%"/>
     <div class="fg"></div>
-    <span class="ebook">Book Store</span>
     <div class="fun">
         <div class="buttons">
+        <span class="title">Book Store</span>
         <router-link to="./books">
             <input type="button" value="图书浏览" />
         </router-link>
@@ -60,6 +60,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.title{
+    cursor:pointer;
+    display:block;
+    font-size:36px;
+    font-family:STHupo;
+    line-height:40px;
+    color:rgba(0, 0, 0, 0.89);
+    margin: 0 auto;
+    width:300px;
+    text-align:center;
+}
+
 .bg{
     width:100vw;
     height:100vh;
@@ -80,16 +93,6 @@ export default {
     z-index:100;
 }
 
-.ebook{
-    position:absolute;
-    top:20px;
-    left:20px;
-    right:0;
-    color:black;
-    opacity:1;
-    z-index:1000;
-}
-
 .fun{
     position:absolute;
     z-index:1000;
@@ -97,15 +100,10 @@ export default {
     width:100%;
 }
 
-.buttons{
-    width:400px;
-    margin:0 auto;
-}
 
 .buttons input{
     margin: 0 auto;
     display:block;
-    margin:30px;
     width:300px;
     height:40px;
     background:#000;
@@ -114,6 +112,7 @@ export default {
     font-size:16px;
     cursor:pointer;
     box-shadow: 0 0 50px 0;
+    margin-top:30px;
 }
 
 input:hover{
