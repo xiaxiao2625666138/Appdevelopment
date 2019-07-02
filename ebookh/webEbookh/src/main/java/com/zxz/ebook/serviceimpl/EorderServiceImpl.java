@@ -1,9 +1,7 @@
 package com.zxz.ebook.serviceimpl;
 
-import com.zxz.ebook.Business.BookSaled;
 import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
-import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.dao.BookDao;
 import com.zxz.ebook.dao.BookimageDao;
 import com.zxz.ebook.dao.EorderDao;
