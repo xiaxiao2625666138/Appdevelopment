@@ -18,6 +18,6 @@ public interface EorderService {
     public String choseAllEorder(String username, String chosen);
     public String deleteEorderFromCart(String username);
     public float payOrder(String username);
-    public List<UserConsume> userConsume(String begin , String end);
-    public List<BookSaled> bookSaled(String begin, String end);
+    public List<Object> userConsume(String begin , String end);
+    public List<Object> bookSaled(String begin, String end);
 }

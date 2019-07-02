@@ -173,12 +173,12 @@ public class EorderServiceImpl implements EorderService {
     }
 
     @Override
-    public List<UserConsume> userConsume(String begin , String end) {
+    public List<Object> userConsume(String begin , String end) {
         return eorderDao.userConsume(begin, end);
     }
 
     @Override
-    public List<BookSaled> bookSaled(String begin, String end) {
+    public List<Object> bookSaled(String begin, String end) {
         return eorderDao.bookSaled(begin, end);
     }
 

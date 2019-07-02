@@ -16,6 +16,6 @@ public interface EorderDao {
     public List<Eorder> getPersonalEorderByPaid(String username, String paid);
     public void deleteEorderByUsername(String username, String paid, String chosen);
     public List<Eorder> getPersonalEorderByPaidAndChosen(String useranme, String paid, String chosen);
-    List<UserConsume> userConsume(String begin , String end);
-    List<BookSaled> bookSaled(String begin, String end);
+    List<Object> userConsume(String begin , String end);
+    List<Object> bookSaled(String begin, String end);
 }

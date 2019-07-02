@@ -34,13 +34,13 @@ public interface EorderRespository extends JpaRepository<Eorder, Integer> {
 
     @Query(value="select user_name as username," +
             " sum(book_num) as booknum, sum(book_num*price) as consumption" +
-            " from eorder natural join book where time between ?1 and ?2 group by user_name", nativeQuery = true)
-    List<UserConsume> userConsume(String begin, String end);
+            " from eorder natural join book where time between ?1 and ?2 and paid='Y' group by user_name", nativeQuery = true)
+    List<Object> userConsume(String begin, String end);
 
     @Query(value="select book_id as id, " +
-            "ISBN as isbn, book_name as name, count(book_id) as personTime," +
-            " sum(book_num) as saled from eorder natural join book where time between ?1 and ?2 group by book_id, book_name, saled, ISBN",
+            "ISBN as isbn, book_name as name, count(time) as personTime," +
+            " sum(book_num) as saled from eorder natural join book where time between ?1 and ?2 and paid='Y' group by book_id, book_name, saled, ISBN",
             nativeQuery = true)
     @Convert
-    List<BookSaled> bookSaled(String begin, String end);
+    List<Object> bookSaled(String begin, String end);
 }

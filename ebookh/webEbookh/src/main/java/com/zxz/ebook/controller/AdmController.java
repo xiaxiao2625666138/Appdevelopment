@@ -53,13 +53,13 @@ public class AdmController {
 
     @ResponseBody
     @RequestMapping(value="/adm/userConsume")
-    public List<UserConsume> userConsume(String begin , String end){
+    public List<Object> userConsume(String begin , String end){
         return eorderService.userConsume(begin, end);
     }
 
     @ResponseBody
     @RequestMapping(value="/adm/bookSaled")
-    public List<BookSaled> bookSaled(String begin , String end){
+    public List<Object> bookSaled(String begin , String end){
         return eorderService.bookSaled(begin,end);
     }
 
