@@ -1,5 +1,5 @@
 <template>
-    <div class="page">
+    <div class="body">
         <div class="content">
             <img src="@/assets/img/guide.jpg"/>
             <div class="foreground"></div>
@@ -77,8 +77,7 @@ export default {
     margin:0 auto;
     overflow:hidden;
     position: relative;
-    border-radius:30px;
-
+    border-radius:10px;
 }
 
 img{
@@ -95,8 +94,9 @@ img:hover{
     height:90%;
     top:60px;
     background:#fff;
+  background:rgb(239, 240, 234);
     position:absolute;
-    opacity: .5;
+    opacity: .8;
 }
 
 .users{

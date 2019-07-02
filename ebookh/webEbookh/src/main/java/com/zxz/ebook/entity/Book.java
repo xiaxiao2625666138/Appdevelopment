@@ -26,6 +26,17 @@ public class Book {
     private  String onsale;
     private String ISBN;
 
+
+    private byte[] bookimage;
+    @Transient
+    public byte[] getBookimage() {
+        return bookimage;
+    }
+
+    public void setBookimage(byte[] bookimage) {
+        this.bookimage = bookimage;
+    }
+
     public Book(){}
 
     @Id

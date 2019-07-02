@@ -91,9 +91,10 @@ export default {
   overflow:hidden;
   position:relative;
   border-radius:10px;
-  box-shadow:0 0 50px 0;
+  box-shadow:0 0 5px 0;
   margin-top:100px;
   margin-left:27%;
+  background:rgb(239, 240, 234);
 }
 
 .nothing{
@@ -160,7 +161,7 @@ export default {
   font-size:15px;
   cursor:pointer;
   background:rgb(20, 188, 255);
-  box-shadow:0 0 15px 0;
+  box-shadow:0 0 5px 0;
 }
 
 .fun input:hover{

@@ -5,6 +5,7 @@ import com.zxz.ebook.Business.Order;
 import com.zxz.ebook.Business.OrderStatistics;
 import com.zxz.ebook.Business.UserConsume;
 import com.zxz.ebook.dao.BookDao;
+import com.zxz.ebook.dao.BookimageDao;
 import com.zxz.ebook.dao.EorderDao;
 import com.zxz.ebook.entity.Book;
 import com.zxz.ebook.entity.Eorder;
@@ -29,6 +30,9 @@ public class EorderServiceImpl implements EorderService {
     private BookDao bookDao;
 
     @Autowired
+    private BookimageDao bookimageDao;
+
+    @Autowired
     private JpaRepository<Eorder, Integer> jpaRepository;
 
     @Autowired
@@ -38,6 +42,10 @@ public class EorderServiceImpl implements EorderService {
     @Override
     public List<Order> lookAllOrder() {
         List<Eorder> eorders=eorderDao.findAll("Y");
+        for(Eorder eorder: eorders){
+            Book book=eorder.getBook();
+            book.setBookimage(bookimageDao.findByBookid(book.getId()).getImage());
+        }
         return OrderTool.getOrders(eorders);
     }
 

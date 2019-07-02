@@ -71,34 +71,17 @@ li{
 }
 
 /*8888888888888888888888888888888888888888888888888888888888888*/
-.page{
-    width:100%;
-    color:#000;
-    background:#fff;
-}
 
 .now{
-    box-shadow:0 0 10px 0;
-    border-radius: 5px;
-    box-shadow:0 0 30px 0;
-    color:rgb(7, 196, 253);
+    text-shadow:0 0 50px 0;
+    color:rgb(1, 196, 255);
+    font-size:30px;
 }
+
 
 
 .block{
     background:#333;
-}
-
-.ebook{
-    cursor:pointer;
-    font-size:50px;
-    font-family:STHupo;
-    height:50px;
-    line-height:50px;
-    color:rgba(0, 0, 0, 0.89);
-    position: absolute;
-    left:20px;
-    top:10px;
 }
 
 .ebook:hover{
@@ -124,7 +107,7 @@ input {
 }
 
 .content{
-    left:27%;
+    margin: 0 auto;
 }
 
 img:hover{
@@ -145,7 +128,7 @@ button{
     border-width:0;
     border-radius:15px;
     background:rgb(66, 190, 228);
-    box-shadow:0 0 15px 0;
+    box-shadow:0 0 5px 0;
     color:#000;
     z-index:100px;
     cursor:pointer;

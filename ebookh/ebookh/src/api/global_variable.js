@@ -1,4 +1,4 @@
-const server="http://localhost:8080/ebook"
+const server="http://localhost:8086/ebook"
 
 export default {
   server
