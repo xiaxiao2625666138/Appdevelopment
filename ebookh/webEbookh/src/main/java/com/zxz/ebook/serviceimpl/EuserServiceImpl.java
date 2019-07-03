@@ -1,7 +1,10 @@
 package com.zxz.ebook.serviceimpl;
 
 import com.zxz.ebook.Business.Order;
+import com.zxz.ebook.dao.BookimageDao;
 import com.zxz.ebook.dao.EuserDao;
+import com.zxz.ebook.entity.Book;
+import com.zxz.ebook.entity.Bookimage;
 import com.zxz.ebook.entity.Eorder;
 import com.zxz.ebook.entity.Euser;
 import com.zxz.ebook.service.EuserService;
@@ -25,6 +28,9 @@ public class EuserServiceImpl implements EuserService {
 
     @Autowired
     private JpaRepository<Euser, String > euserJpaRepository;
+
+    @Autowired
+    private BookimageDao bookimageDao;
     /*
 
     @Override
@@ -110,6 +116,10 @@ public class EuserServiceImpl implements EuserService {
     @Override
     public List<Order> getOrders(String username) {
         List<Eorder> eorders=this.getPersonalEorder(username, "Y");
+        for(Eorder eorder: eorders){
+            Book book=eorder.getBook();
+            book.setBookimage(bookimageDao.findByBookid(book.getId()).getImage());
+        }
         return OrderTool.getOrders(eorders);
     }
 
