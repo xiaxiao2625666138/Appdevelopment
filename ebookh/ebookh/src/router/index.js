@@ -3,8 +3,6 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Books from '@/components/books/Books'
 import Shopping from '@/components/shopping/Shopping'
-import Daijian from '@/components/daijian/Daijian'
-import Setting from '@/components/setting/setting'
 import Order from '@/components/order/Order'
 import Guide from '@/components/guide/Guide'
 import UserManage from '@/components/userManage/UserManage'
@@ -26,16 +24,6 @@ export default new Router({
       path:'/shopping',
       name:'Shopping',
       component:Shopping
-    },
-    {
-      path:'/daijian',
-      name:'Daijian',
-      component:Daijian
-    },
-    {
-      path:'/setting',
-      name:'Setting',
-      component:Setting
     },
     {
       path:'/order',
